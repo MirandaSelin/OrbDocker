@@ -8,7 +8,7 @@ RUN apt-get install -y cmake
 
 RUN apt-get install -y build-essential libeigen3-dev \
     libgl1-mesa-dev \
-    libglew-dev unzip
+    libglew-dev
 
 # Install Pangolin 0.6
 RUN cd /tmp && git clone https://github.com/stevenlovegrove/Pangolin && \
@@ -46,9 +46,6 @@ COPY ./src ./src
 
 # Install crow
 RUN dpkg -i ~/src/lib/crow-v1.0+5.deb
-
-# Make build directory
-RUN mkdir ~/src/build
 
 # build example
 RUN cd ~/src/build && cmake .. && make

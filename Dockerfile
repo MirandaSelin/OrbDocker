@@ -53,8 +53,7 @@ RUN cd ~/src/build && cmake .. && make
 # add EuRoC dataset
 RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hall/MH_01_easy/MH_01_easy.zip
 
-RUN sudo apt-get update
-RUN sudo apt-get install unzip
+RUN apt-get update && apt-get install -y unzip
 RUN cd ~ && unzip MH_01_easy.zip
 
 # Set default command to start an interactive shell

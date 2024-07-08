@@ -33,9 +33,6 @@ RUN echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sour
 RUN apt update
 RUN apt install -y sublime-text
 
-RUN mkdir -p /root/dataset/EUROC/MH01 && \
-    wget -qO- http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hall/MH01.tar | tar xv -C /root/dataset/EUROC/MH01 --strip-components=1
-
 # lib for ORB_SLAM3
 RUN apt-get install -y libboost-all-dev libssl-dev libcanberra-gtk3-module
 
@@ -52,6 +49,10 @@ COPY ./src ./src
 
 # build example
 RUN cd ~/src/build && cmake .. && make
+
+# add EuRoC dataset
+RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hall/MH_01_easy/MH_01_easy.zip
+RUN cd ~ && unzip MH_01_easy.zip
 
 # Set default command to start an interactive shell
 CMD ["/bin/bash"]

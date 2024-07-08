@@ -44,8 +44,5 @@ RUN cd ~ && mkdir Dev && cd Dev && git clone https://github.com/Leonana69/ORB_SL
 WORKDIR /root
 COPY ./src ./src
 
-# Install crow
-RUN dpkg -i ~/src/lib/crow-v1.0+5.deb
-
 # build example
 RUN cd ~/src/build && cmake .. && make

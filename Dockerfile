@@ -44,9 +44,6 @@ RUN cd ~ && mkdir Dev && cd Dev && git clone https://github.com/Leonana69/ORB_SL
 WORKDIR /root
 COPY ./src ./src
 
-# make edits
-# RUN sed -i 's/false/true/g' /root/ORB_SLAM3/some_file.cpp
-
 # build example
 RUN cd ~/src/build && cmake .. && make
 
@@ -55,6 +52,10 @@ RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/ma
 
 RUN apt-get update && apt-get install -y unzip
 RUN cd ~ && unzip MH_01_easy.zip
+RUN cd ~ && rm *.zip
+
+# make edits
+# RUN sed -i 's/false/true/g' /root/Dev/ORB_SLAM3/Examples/Monocular/mono_euroc.cc
 
 # Set default command to start an interactive shell
 CMD ["/bin/bash"]

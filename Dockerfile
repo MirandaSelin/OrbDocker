@@ -45,4 +45,6 @@ WORKDIR /root
 COPY ./src ./src
 
 # build example
-RUN cd ~/src/build && cmake .. && make
+RUN cd ~/src/build
+RUN cmake .. 
+RUN make

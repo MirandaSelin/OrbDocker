@@ -38,8 +38,8 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(mono_service mono_service.cc)
-add_executable(mono_nuc mono_nuc.cc)
+#add_executable(mono_service mono_service.cc)
+#add_executable(mono_nuc mono_nuc.cc)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -52,16 +52,16 @@ add_executable(mono_nuc mono_nuc.cc)
 # add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(mono_service
-  ${EIGEN3_LIBS}
-  ${Pangolin_LIBRARIES}
-  ${OpenCV_LIBRARIES}
-  ~/Dev/ORB_SLAM3/lib/libORB_SLAM3.so
-)
+##target_link_libraries(mono_service
+##  ${EIGEN3_LIBS}
+##  ${Pangolin_LIBRARIES}
+##  ${OpenCV_LIBRARIES}
+##  ~/Dev/ORB_SLAM3/lib/libORB_SLAM3.so
+#)
 
-target_link_libraries(mono_nuc
-  ${EIGEN3_LIBS}
-  ${Pangolin_LIBRARIES}
-  ${OpenCV_LIBRARIES}
-  ~/Dev/ORB_SLAM3/lib/libORB_SLAM3.so
-)
+##target_link_libraries(mono_nuc
+##  ${EIGEN3_LIBS}
+##  ${Pangolin_LIBRARIES}
+##  ${OpenCV_LIBRARIES}
+##  ~/Dev/ORB_SLAM3/lib/libORB_SLAM3.so
+#)

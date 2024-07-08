@@ -12,4 +12,4 @@ docker image rm -f mes-orb-slam:0.1
 docker rm -f mes-orb-slam &>/dev/null
 
 # build
-docker build -t mes-orb-slamv:0.1 .
+docker build -t mes-orb-slam:0.1 .

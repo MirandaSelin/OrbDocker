@@ -44,5 +44,11 @@ RUN cd ~ && mkdir Dev && cd Dev && git clone https://github.com/Leonana69/ORB_SL
 WORKDIR /root
 COPY ./src ./src
 
+# make edits
+#RUN sed -i 's/false/true/g' /root/ORB_SLAM3/some_file.cpp
+
 # build example
 RUN cd ~/src/build && cmake .. && make
+
+# Set default command to start an interactive shell
+CMD ["/bin/bash"]

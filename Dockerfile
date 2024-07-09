@@ -43,6 +43,7 @@ RUN cd ~ && mkdir Dev && cd Dev && git clone https://github.com/Leonana69/ORB_SL
 
 WORKDIR /root
 COPY ./src ./src
+# copy fodler with run instructions (.sh)
 
 # build example
 RUN cd ~/src/build && cmake .. && make
@@ -56,6 +57,9 @@ RUN cd ~ && rm *.zip
 
 # make edits
 # RUN sed -i 's/false/true/g' /root/Dev/ORB_SLAM3/Examples/Monocular/mono_euroc.cc
+
+# build example
+RUN cd ~/src/build && cmake .. && make
 
 # Set default command to start an interactive shell
 CMD ["/bin/bash"]

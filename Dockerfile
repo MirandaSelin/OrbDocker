@@ -77,6 +77,10 @@ RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git /root/Dev/ORB_SLAM3 --dept
 WORKDIR /root/Dev/ORB_SLAM3
 RUN patch -p1 < ../Patch/orb_slam3_patch.diff
 
+# Copy in files
+COPY Programs/mono_webcam.cc /root/Dev/ORB_SLAM3/Examples/Monocular/mono_webcam.cc
+COPY Programs/basic_webcam.cc /root/Dev/ORB_SLAM3/Examples/Monocular/basic_webcam.cc
+
 # Build ORB_SLAM3
 RUN chmod +x build.sh && ./build.sh
 

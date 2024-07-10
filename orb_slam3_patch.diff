@@ -1,3 +1,22 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 07b730a..fbd5ae8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -189,6 +189,14 @@ add_executable(mono_euroc
+         Examples/Monocular/mono_euroc.cc)
+ target_link_libraries(mono_euroc ${PROJECT_NAME})
+ 
++add_executable(mono_webcam
++        Examples/Monocular/mono_webcam.cc)
++target_link_libraries(mono_webcam ${PROJECT_NAME})
++
++add_executable(basic_webcam
++        Examples/Monocular/basic_webcam.cc)
++target_link_libraries(basic_webcam ${PROJECT_NAME})
++
+ add_executable(mono_tum_vi
+         Examples/Monocular/mono_tum_vi.cc)
+ target_link_libraries(mono_tum_vi ${PROJECT_NAME})
 diff --git a/Examples/Monocular/mono_euroc.cc b/Examples/Monocular/mono_euroc.cc
 index fc5ed0d..7f54f5b 100644
 --- a/Examples/Monocular/mono_euroc.cc

@@ -65,15 +65,15 @@ RUN apt-get update && apt-get install -y unzip
 RUN cd ~ && unzip MH_01_easy.zip && rm *.zip
 
 # Copy in basic webcam
-COPY Basic/basic_webcam.cc /root/Dev/Basic/
-COPY Basic/Makefile /root/Dev/Basic/
+COPY Basic/basic_webcam.cc /root/Dev/Basic/basic_webcam.cc
+COPY Basic/Makefile /root/Dev/Basic/Makefile
 
 # Copy the patch file into the Docker image
 COPY orb_slam3_patch.diff /root/Dev/Patch/
 
 # Copy the shell scripts into the image
-COPY mono_euroc.sh /root/Dev/Scripts/
-COPY mono_inertial_euroc.sh /root/Dev/Scripts/
+COPY mono_euroc.sh /root/Dev/Scripts/mono_euroc.sh
+COPY mono_inertial_euroc.sh /root/Dev/Scripts/mono_inertial_euroc.sh
 
 # Make the scripts executable
 RUN chmod +x /root/Dev/Scripts/mono_euroc.sh

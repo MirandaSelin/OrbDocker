@@ -31,10 +31,6 @@ RUN cd /tmp && git clone https://github.com/stevenlovegrove/Pangolin && \
     make -j$(nproc) && make install && \
     cd / && rm -rf /tmp/Pangolin
 
-# Add debugging steps
-RUN echo "Testing network connectivity..." && \
-    ping -c 4 github.com
-
 # Install OpenCV 4.4.0
 RUN cd /tmp && \
     echo "Cloning OpenCV repository..." && \
@@ -52,6 +48,9 @@ RUN cd /tmp && \
           -D CMAKE_INSTALL_PREFIX=/usr/local .. && \
     echo "Running make..." && \
     make -j$(nproc) && make install && \
+    # Manually install pkg-config files if not generated
+    mkdir -p /usr/local/lib/pkgconfig && \
+    cp /tmp/opencv/build/unix-install/opencv4.pc /usr/local/lib/pkgconfig/opencv4.pc && \
     cd / && rm -rf /tmp/opencv
 
 # Install sublime-text

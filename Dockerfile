@@ -59,12 +59,21 @@ RUN wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmo
 RUN echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
 RUN apt update && apt install -y sublime-text
 
+# Add EuRoC dataset
+RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hall/MH_01_easy/MH_01_easy.zip
+RUN apt-get update && apt-get install -y unzip
+RUN cd ~ && unzip MH_01_easy.zip && rm *.zip
+
+# Copy in basic webcam
+COPY Basic/basic_webcam.cc /root/Dev/Basic/
+COPY Basic/Makefile /root/Dev/Basic/
+
 # Copy the patch file into the Docker image
 COPY orb_slam3_patch.diff /root/Dev/Patch/
 
 # Copy the shell scripts into the image
-COPY mono_euroc.sh /root/Dev/Scripts/mono_euroc.sh
-COPY mono_inertial_euroc.sh /root/Dev/Scripts/mono_inertial_euroc.sh
+COPY mono_euroc.sh /root/Dev/Scripts/
+COPY mono_inertial_euroc.sh /root/Dev/Scripts/
 
 # Make the scripts executable
 RUN chmod +x /root/Dev/Scripts/mono_euroc.sh
@@ -85,11 +94,6 @@ COPY ./src ./src
 
 # Build example
 RUN cd ~/src/build && cmake .. && make
-
-# Add EuRoC dataset
-RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hall/MH_01_easy/MH_01_easy.zip
-RUN apt-get update && apt-get install -y unzip
-RUN cd ~ && unzip MH_01_easy.zip && rm *.zip
 
 # Build example again
 RUN cd ~/src/build && cmake .. && make

@@ -74,7 +74,7 @@ RUN chmod +x /root/Dev/Scripts/mono_inertial_euroc.sh
 RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git /root/Dev/ORB_SLAM3 --depth 1
 
 # Copy in webcam file
-COPY Prograns/mono_webcam.cc /root/Dev/ORB_SLAM3/Examples/Monocular/mono_webcam.cc
+COPY Programs/mono_webcam.cc /root/Dev/ORB_SLAM3/Examples/Monocular/mono_webcam.cc
 
 # Apply the patch
 WORKDIR /root/Dev/ORB_SLAM3

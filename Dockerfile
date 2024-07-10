@@ -64,10 +64,6 @@ RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/ma
 RUN apt-get update && apt-get install -y unzip
 RUN cd ~ && unzip MH_01_easy.zip && rm *.zip
 
-# Copy in basic webcam
-COPY src/Basic/basic_webcam.cc /root/Dev/Basic/basic_webcam.cc
-COPY src/Basic/Makefile /root/Dev/Basic/Makefile
-
 # Copy the patch file into the Docker image
 COPY orb_slam3_patch.diff /root/Dev/Patch/
 
@@ -93,9 +89,6 @@ WORKDIR /root
 COPY ./src ./src
 
 # Build example
-RUN cd ~/src/build && cmake .. && make
-
-# Build example again
 RUN cd ~/src/build && cmake .. && make
 
 # Set default command to start an interactive shell

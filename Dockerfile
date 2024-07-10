@@ -70,10 +70,12 @@ COPY orb_slam3_patch.diff /root/Dev/Patch/
 # Copy the shell scripts into the image
 COPY mono_euroc.sh /root/Dev/Scripts/mono_euroc.sh
 COPY mono_inertial_euroc.sh /root/Dev/Scripts/mono_inertial_euroc.sh
+COPY mono_webcam.sh /root/Dev/Scripts/mono_webcam.sh
 
 # Make the scripts executable
 RUN chmod +x /root/Dev/Scripts/mono_euroc.sh
 RUN chmod +x /root/Dev/Scripts/mono_inertial_euroc.sh
+RUN chmod +x /root/Dev/Scripts/mono_webcam.sh
 
 # Clone ORB_SLAM3 from the new repository
 RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git /root/Dev/ORB_SLAM3 --depth 1

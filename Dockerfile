@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     libcanberra-gtk3-module \
     unzip \
     iputils-ping \
+    x11-apps \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Pangolin 0.6

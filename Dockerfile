@@ -58,11 +58,17 @@ RUN wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmo
 RUN echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
 RUN apt update && apt install -y sublime-text
 
+# Copy the patch file into the Docker image
+COPY orb_slam3_patch.diff /root/Dev/Patch/
+
 # Clone ORB_SLAM3 from the new repository
 RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git /root/Dev/ORB_SLAM3 --depth 1
 
-# Build ORB_SLAM3
+# Apply the patch
 WORKDIR /root/Dev/ORB_SLAM3
+RUN patch -p1 < ../Patch/orb_slam3_patch.diff
+
+# Build ORB_SLAM3
 RUN chmod +x build.sh && ./build.sh
 
 WORKDIR /root

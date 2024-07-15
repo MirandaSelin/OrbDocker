@@ -78,11 +78,11 @@ RUN chmod +x /root/Dev/Scripts/mono_inertial_euroc.sh
 RUN chmod +x /root/Dev/Scripts/mono_webcam.sh
 
 # Clone ORB_SLAM3 from the new repository
-RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git /root/Dev/ORB_SLAM3 --depth 1
+RUN git clone https://github.com/fishmarch/ORB-SLAM3-Dense.git /root/Dev/ORB-SLAM3-Dense --depth 1
 
 # Apply the patch
-WORKDIR /root/Dev/ORB_SLAM3
-RUN patch -p1 < ../Patch/orb_slam3_patch.diff
+WORKDIR /root/Dev/ORB-SLAM3-Dense
+# RUN patch -p1 < ../Patch/orb_slam3_patch.diff
 
 # Build ORB_SLAM3
 RUN chmod +x build.sh && ./build.sh

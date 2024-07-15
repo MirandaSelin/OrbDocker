@@ -35,13 +35,15 @@ RUN cd /tmp && git clone https://github.com/stevenlovegrove/Pangolin && \
 RUN echo "Testing network connectivity..." && \
     ping -c 4 github.com
 
-# Install OpenCV 4.4.0
+# Install OpenCV 3.3.0
 RUN cd /tmp && \
     echo "Cloning OpenCV repository..." && \
     git clone https://github.com/opencv/opencv.git && \
     cd opencv && \
-    echo "Checking out version 4.4.0..." && \
-    git checkout 3.0.0 && \
+    echo "Checking out version 3.0.0..." && \
+    git checkout 3.0.0
+
+RUN 
     mkdir build && cd build && \
     echo "Running cmake..." && \
     cmake -D CMAKE_BUILD_TYPE=Release \
@@ -49,7 +51,9 @@ RUN cd /tmp && \
           -D BUILD_DOCS=OFF \
           -D BUILD_PERF_TESTS=OFF \
           -D BUILD_TESTS=OFF \
-          -D CMAKE_INSTALL_PREFIX=/usr/local .. && \
+          -D CMAKE_INSTALL_PREFIX=/usr/local ..
+
+RUN
     echo "Running make..." && \
     make -j$(nproc) && make install && \
     cd / && rm -rf /tmp/opencv

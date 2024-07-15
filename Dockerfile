@@ -41,7 +41,7 @@ RUN cd /tmp && \
     git clone https://github.com/opencv/opencv.git && \
     cd opencv && \
     echo "Checking out version 4.4.0..." && \
-    git checkout 4.4.0 && \
+    git checkout 3.0.0 && \
     mkdir build && cd build && \
     echo "Running cmake..." && \
     cmake -D CMAKE_BUILD_TYPE=Release \

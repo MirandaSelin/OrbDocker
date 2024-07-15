@@ -7,9 +7,9 @@ xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 xhost +local:docker
 
 # remove old container and image
-docker stop -t 0 mes-orb-slam
-docker image rm -f mes-orb-slam:0.1
-docker rm -f mes-orb-slam &>/dev/null
+docker stop -t 0 mes-orb-slam-dense
+docker image rm -f mes-orb-slam-dense:0.1
+docker rm -f mes-orb-slam-dense &>/dev/null
 
 # build
-docker build -t mes-orb-slam:0.1 .
+docker build -t mes-orb-slam-dense:0.1 .

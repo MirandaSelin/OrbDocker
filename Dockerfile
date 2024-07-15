@@ -66,6 +66,7 @@ RUN cd ~ && unzip MH_01_easy.zip && rm *.zip
 
 # Copy the patch file into the Docker image
 COPY orb_slam3_patch.diff /root/Dev/Patch/
+COPY patch.diff /root/Dev/Patch/
 
 # Copy the shell scripts into the image
 COPY mono_euroc.sh /root/Dev/Scripts/mono_euroc.sh
@@ -83,6 +84,7 @@ RUN git clone https://github.com/fishmarch/ORB-SLAM3-Dense.git /root/Dev/ORB-SLA
 # Apply the patch
 WORKDIR /root/Dev/ORB-SLAM3-Dense
 # RUN patch -p1 < ../Patch/orb_slam3_patch.diff
+RUN patch -p1 < ../Patch/patch.diff
 
 # Build ORB_SLAM3
 RUN chmod +x build.sh && ./build.sh

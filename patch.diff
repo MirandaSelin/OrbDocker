@@ -1,12 +1,24 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 985ad1f..20dec68 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -11,6 +11,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall   -O3")
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall   -O3")
+ set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -march=native")
+ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
++SET (OpenCV_DIR /usr/local/include/opencv4)
+ 
+ # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-deprecated -O3 -march=native ")
+ # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-deprecated -O3 -march=native")
 diff --git a/Thirdparty/DBoW2/CMakeLists.txt b/Thirdparty/DBoW2/CMakeLists.txt
-index 0eb5126..76b0dcf 100644
+index 0eb5126..d051a28 100644
 --- a/Thirdparty/DBoW2/CMakeLists.txt
 +++ b/Thirdparty/DBoW2/CMakeLists.txt
 @@ -3,6 +3,7 @@ project(DBoW2)
  
  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall  -O3 -march=native ")
  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall  -O3 -march=native")
-+set(OpenCV_DIR /usr/local/include/opencv4)
++SET (OpenCV_DIR /usr/local/include/opencv4)
  
  set(HDRS_DBOW2
    DBoW2/BowVector.h

@@ -43,8 +43,7 @@ RUN cd /tmp && \
     echo "Checking out version 3.0.0..." && \
     git checkout 3.0.0
 
-RUN 
-    mkdir build && cd build && \
+RUN mkdir build && cd build && \
     echo "Running cmake..." && \
     cmake -D CMAKE_BUILD_TYPE=Release \
           -D BUILD_EXAMPLES=OFF \
@@ -53,8 +52,7 @@ RUN
           -D BUILD_TESTS=OFF \
           -D CMAKE_INSTALL_PREFIX=/usr/local ..
 
-RUN
-    echo "Running make..." && \
+RUN echo "Running make..." && \
     make -j$(nproc) && make install && \
     cd / && rm -rf /tmp/opencv
 

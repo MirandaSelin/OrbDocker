@@ -35,25 +35,14 @@ RUN cd /tmp && git clone https://github.com/stevenlovegrove/Pangolin && \
 RUN echo "Testing network connectivity..." && \
     ping -c 4 github.com
 
-# Install OpenCV 3.3.0
-RUN cd /tmp && \
-    echo "Cloning OpenCV repository..." && \
-    git clone https://github.com/opencv/opencv.git && \
+# Install Opencv 3.2.0
+RUN apt-get install -y libgtk-3-dev
+RUN cd /tmp && git clone https://github.com/opencv/opencv.git && \
     cd opencv && \
-    echo "Checking out version 3.0.0..." && \
-    git checkout 3.0.0
-
-RUN mkdir build && cd build && \
-    echo "Running cmake..." && \
-    cmake -D CMAKE_BUILD_TYPE=Release \
-          -D BUILD_EXAMPLES=OFF \
-          -D BUILD_DOCS=OFF \
-          -D BUILD_PERF_TESTS=OFF \
-          -D BUILD_TESTS=OFF \
-          -D CMAKE_INSTALL_PREFIX=/usr/local ..
-
-RUN echo "Running make..." && \
-    make -j$(nproc) && make install && \
+    git checkout 3.2.0 && \
+    mkdir build && cd build && \
+    cmake -D CMAKE_BUILD_TYPE=Release -D BUILD_EXAMPLES=OFF -D BUILD_DOCS=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_TESTS=OFF -D CMAKE_INSTALL_PREFIX=/usr/local .. &&\
+    make -j$nproc && make install && \
     cd / && rm -rf /tmp/opencv
 
 # Install sublime-text

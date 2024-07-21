@@ -70,7 +70,7 @@ RUN git clone -b pcl-1.7.2 https://github.com/PointCloudLibrary/pcl.git /pcl
 
 # Build and install PCL 1.7
 RUN cd /pcl && mkdir build && cd build && \
-    cmake .. && \
+    cmake -DOpenGL_GL_PREFERENCE=GLVND .. && \
     make -j$(nproc) && \
     make install
 

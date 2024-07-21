@@ -35,14 +35,14 @@ RUN cd /tmp && git clone https://github.com/stevenlovegrove/Pangolin && \
 RUN echo "Testing network connectivity..." && \
     ping -c 4 github.com
 
-# Install Opencv 3.2.0
+# Install OpenCV 3.2.0
 RUN apt-get install -y libgtk-3-dev
 RUN cd /tmp && git clone https://github.com/opencv/opencv.git && \
     cd opencv && \
     git checkout 3.2.0 && \
     mkdir build && cd build && \
     cmake -D CMAKE_BUILD_TYPE=Release -D BUILD_EXAMPLES=OFF -D BUILD_DOCS=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_TESTS=OFF -D CMAKE_INSTALL_PREFIX=/usr/local .. &&\
-    make -j$nproc && make install && \
+    make -j$(nproc) && make install && \
     cd / && rm -rf /tmp/opencv
 
 # Install sublime-text
@@ -54,6 +54,31 @@ RUN apt update && apt install -y sublime-text
 RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hall/MH_01_easy/MH_01_easy.zip
 RUN apt-get update && apt-get install -y unzip
 RUN cd ~ && unzip MH_01_easy.zip && rm *.zip
+
+# Install dependencies for PCL 1.7
+RUN apt-get update && apt-get install -y \
+    libflann-dev \
+    libvtk7-dev \
+    libqhull-dev \
+    libusb-1.0-0-dev \
+    libpcap-dev \
+    libpng-dev \
+    libproj-dev
+
+# Clone PCL 1.7 repository
+RUN git clone -b pcl-1.7.2 https://github.com/PointCloudLibrary/pcl.git /pcl
+
+# Build and install PCL 1.7
+RUN cd /pcl && mkdir build && cd build && \
+    cmake .. && \
+    make -j$(nproc) && \
+    make install
+
+# Set the library path
+ENV LD_LIBRARY_PATH /usr/local/lib:$LD_LIBRARY_PATH
+
+# Clean up
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Copy the patch file into the Docker image
 COPY orb_slam3_patch.diff /root/Dev/Patch/

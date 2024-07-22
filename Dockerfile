@@ -134,7 +134,6 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libusb-1.0-0-dev \
     libflann-dev \
-    openssl \
     && rm -rf /var/lib/apt/lists/*
 
 # Clone ORB_SLAM3 from the new repository
@@ -147,15 +146,6 @@ RUN patch -p1 < ../Patch/patch.diff
 
 # Set VTK_DIR environment variable
 ENV VTK_DIR=/usr/lib/cmake/vtk-7.1
-
-# Set C++ compiler and standard
-RUN echo 'set(CMAKE_CXX_COMPILER "/usr/bin/c++")' >> CMakeLists.txt && \
-    echo 'set(CMAKE_CXX_COMPILER_ARG1 "")' >> CMakeLists.txt && \
-    echo 'set(CMAKE_CXX_COMPILER_ID "GNU")' >> CMakeLists.txt && \
-    echo 'set(CMAKE_CXX_COMPILER_VERSION "7.5.0")' >> CMakeLists.txt && \
-    echo 'set(CMAKE_CXX_COMPILER_VERSION_INTERNAL "")' >> CMakeLists.txt && \
-    echo 'set(CMAKE_CXX_COMPILER_WRAPPER "")' >> CMakeLists.txt && \
-    echo 'set(CMAKE_CXX_STANDARD_COMPUTED_DEFAULT "14")' >> CMakeLists.txt
 
 # Build ORB_SLAM3
 RUN sed -i 's/c++11/c++11/g' CMakeLists.txt

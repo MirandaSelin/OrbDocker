@@ -59,6 +59,7 @@ RUN cd ~ && unzip MH_01_easy.zip && rm *.zip
 RUN apt-get update && apt-get install -y \
     libflann-dev \
     libvtk7-dev \
+    libvtk7-qt-dev \
     libqhull-dev \
     libusb-1.0-0-dev \
     libpcap-dev \

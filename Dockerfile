@@ -1,4 +1,54 @@
+# Build PCL 1.7.2 in Ubuntu 14.04
+FROM ubuntu:14.04 AS builder
+
+# Set environment variables to avoid interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    libusb-1.0-0-dev \
+    libeigen3-dev \
+    libflann-dev \
+    libboost-all-dev \
+    libvtk5.8 \
+    libvtk5-dev \
+    libqhull-dev \
+    libgtest-dev \
+    freeglut3-dev \
+    pkg-config \
+    libxmu-dev \
+    libxi-dev \
+    libopenni-dev \
+    libpcap-dev \
+    libglew-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libtiff-dev \
+    git \
+    wget
+
+# Download and extract PCL source code
+RUN wget https://github.com/PointCloudLibrary/pcl/archive/pcl-1.7.2.tar.gz \
+    && tar -xvf pcl-1.7.2.tar.gz
+
+# Modify the source code to fix the pointer comparison issue
+RUN cd pcl-pcl-1.7.2 \
+    && sed -i 's/children_[i] == false/children_[i] == nullptr/g' outofcore/include/pcl/outofcore/impl/octree_base_node.hpp
+
+# Build and install PCL
+RUN cd pcl-pcl-1.7.2 \
+    && mkdir build \
+    && cd build \
+    && cmake .. \
+    && make -j$(nproc) \
+    && make install
+
+# Use a new stage to create a clean final image
 FROM ubuntu:focal
+
+COPY --from=builder /usr/local /usr/local
 
 # Set environment variables to avoid interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -22,7 +72,6 @@ RUN apt-get update && apt-get install -y \
     unzip \
     iputils-ping \
     x11-apps \
-    software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Pangolin 0.6
@@ -56,46 +105,14 @@ RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/ma
 RUN apt-get update && apt-get install -y unzip
 RUN cd ~ && unzip MH_01_easy.zip && rm *.zip
 
-# Install dependencies for PCL 1.7.1
-RUN apt-get update && apt-get install -y \
-    libflann-dev \
-    libqhull-dev \
-    libusb-1.0-0-dev \
-    libpcap-dev \
-    libpng-dev \
-    libproj-dev
-
-# Add PPA for older VTK version and install VTK 6
-RUN add-apt-repository ppa:rock-core/qt4 && \
-    apt-get update && \
-    apt-get install -y \
-    libvtk6-dev \
-    libvtk6-qt-dev
-
-# Clone PCL source code
-RUN git clone https://github.com/PointCloudLibrary/pcl.git /pcl
-WORKDIR /pcl
-RUN git checkout pcl-1.7.1
-
-# Create build directory
-RUN mkdir build
-WORKDIR /pcl/build
-
-# Configure and build PCL with VTK 6
-RUN cmake .. \
-    -DBUILD_SHARED_LIBS=ON \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr/local \
-    -DPCL_ENABLE_SSE=ON \
-    -DPCL_ENABLE_AVX=ON \
-    -DBUILD_tools=ON \
-    -DBUILD_examples=ON \
-    -DVTK_DIR=/usr/lib/vtk-6.3
-RUN make -j$(nproc)
-RUN make install
-
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install VTK using the package manager
+RUN apt-get update && apt-get install -y \
+    libvtk7-dev \
+    libvtk7.1p \
+    python3-vtk7
 
 # Copy the patch file into the Docker image
 COPY orb_slam3_patch.diff /root/Dev/Patch/
@@ -111,6 +128,15 @@ RUN chmod +x /root/Dev/Scripts/mono_euroc.sh
 RUN chmod +x /root/Dev/Scripts/mono_inertial_euroc.sh
 RUN chmod +x /root/Dev/Scripts/mono_webcam.sh
 
+# Update and install basic packages
+RUN apt-get update && apt-get install -y \
+    libpcap-dev \
+    libpng-dev \
+    libusb-1.0-0-dev \
+    libflann-dev \
+    openssl \
+    && rm -rf /var/lib/apt/lists/*
+
 # Clone ORB_SLAM3 from the new repository
 RUN git clone https://github.com/fishmarch/ORB-SLAM3-Dense.git /root/Dev/ORB-SLAM3-Dense --depth 1
 
@@ -119,7 +145,20 @@ WORKDIR /root/Dev/ORB-SLAM3-Dense
 # RUN patch -p1 < ../Patch/orb_slam3_patch.diff
 RUN patch -p1 < ../Patch/patch.diff
 
+# Set VTK_DIR environment variable
+ENV VTK_DIR=/usr/lib/cmake/vtk-7.1
+
+# Set C++ compiler and standard
+RUN echo 'set(CMAKE_CXX_COMPILER "/usr/bin/c++")' >> CMakeLists.txt && \
+    echo 'set(CMAKE_CXX_COMPILER_ARG1 "")' >> CMakeLists.txt && \
+    echo 'set(CMAKE_CXX_COMPILER_ID "GNU")' >> CMakeLists.txt && \
+    echo 'set(CMAKE_CXX_COMPILER_VERSION "7.5.0")' >> CMakeLists.txt && \
+    echo 'set(CMAKE_CXX_COMPILER_VERSION_INTERNAL "")' >> CMakeLists.txt && \
+    echo 'set(CMAKE_CXX_COMPILER_WRAPPER "")' >> CMakeLists.txt && \
+    echo 'set(CMAKE_CXX_STANDARD_COMPUTED_DEFAULT "14")' >> CMakeLists.txt
+
 # Build ORB_SLAM3
+RUN sed -i 's/c++11/c++11/g' CMakeLists.txt
 RUN chmod +x build.sh && ./build.sh
 
 WORKDIR /root

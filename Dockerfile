@@ -33,10 +33,6 @@ RUN apt-get update && apt-get install -y \
 RUN wget https://github.com/PointCloudLibrary/pcl/archive/pcl-1.7.2.tar.gz \
     && tar -xvf pcl-1.7.2.tar.gz
 
-# Modify the source code to fix the pointer comparison issue
-RUN cd pcl-pcl-1.7.2 \
-    && sed -i 's/children_[i] == false/children_[i] == nullptr/g' outofcore/include/pcl/outofcore/impl/octree_base_node.hpp
-
 # Build and install PCL
 RUN cd pcl-pcl-1.7.2 \
     && mkdir build \
@@ -80,10 +76,6 @@ RUN cd /tmp && git clone https://github.com/stevenlovegrove/Pangolin && \
     cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=-std=c++11 .. && \
     make -j$(nproc) && make install && \
     cd / && rm -rf /tmp/Pangolin
-
-# Add debugging steps
-RUN echo "Testing network connectivity..." && \
-    ping -c 4 github.com
 
 # Install OpenCV 3.2.0
 RUN apt-get install -y libgtk-3-dev

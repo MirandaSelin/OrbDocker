@@ -1,27 +1,24 @@
-FROM ubuntu:18.04 as builder
+# Build PCL 1.7 in Ubuntu 18.04
+FROM ubuntu:18.04 AS builder
+
+# Set environment variables to avoid interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     libusb-1.0-0-dev \
-    libusb-dev \
-    libudev-dev \
-    mpi-default-dev \
-    openmpi-bin \
-    openmpi-common \
-    libflann1.9 \
-    libflann-dev \
     libeigen3-dev \
+    libflann-dev \
     libboost-all-dev \
     libvtk6.3 \
     libvtk6-dev \
-    libqhull* \
+    libqhull-dev \
     libgtest-dev \
     freeglut3-dev \
     pkg-config \
     libxmu-dev \
     libxi-dev \
-    mono-complete \
     libopenni-dev \
     libopenni2-dev \
     libpcap-dev \

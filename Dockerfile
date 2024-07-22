@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     iputils-ping \
     x11-apps \
+    software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Pangolin 0.6

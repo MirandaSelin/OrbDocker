@@ -147,6 +147,7 @@ RUN patch -p1 < ../Patch/patch.diff
 # Set VTK_DIR environment variable
 ENV VTK_DIR=/usr/lib/cmake/vtk-7.1
 
+
 # Build ORB_SLAM3
 RUN sed -i 's/c++11/c++11/g' CMakeLists.txt
 RUN chmod +x build.sh && ./build.sh

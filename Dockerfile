@@ -76,7 +76,7 @@ RUN cd /pcl && mkdir build && cd build && \
     make install
 
 # Set the library path
-ENV LD_LIBRARY_PATH /usr/local/lib:$LD_LIBRARY_PATH
+# ENV LD_LIBRARY_PATH /usr/local/lib:$LD_LIBRARY_PATH
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

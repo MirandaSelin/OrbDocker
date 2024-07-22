@@ -69,7 +69,7 @@ RUN apt-get update && apt-get install -y \
 # Clone PCL source code
 RUN git clone https://github.com/PointCloudLibrary/pcl.git /pcl
 WORKDIR /pcl
-RUN git checkout pcl-1.7.2
+RUN git checkout pcl-1.7.1
 
 # Create build directory
 RUN mkdir build

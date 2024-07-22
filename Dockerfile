@@ -69,14 +69,14 @@ RUN apt-get update && apt-get install -y \
 # Clone PCL 1.7 repository
 RUN git clone -b pcl-1.7.2 https://github.com/PointCloudLibrary/pcl.git /pcl
 
+# Set the library path
+ ENV LD_LIBRARY_PATH /usr/local/lib:$LD_LIBRARY_PATH
+
 # Build and install PCL 1.7
 RUN cd /pcl && mkdir build && cd build && \
     cmake -DOpenGL_GL_PREFERENCE=GLVND .. && \
     make -j4 && \
     make install
-
-# Set the library path
-# ENV LD_LIBRARY_PATH /usr/local/lib:$LD_LIBRARY_PATH
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

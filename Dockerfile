@@ -1,4 +1,49 @@
+FROM ubuntu:18.04 as builder
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    libusb-1.0-0-dev \
+    libusb-dev \
+    libudev-dev \
+    mpi-default-dev \
+    openmpi-bin \
+    openmpi-common \
+    libflann1.9 \
+    libflann-dev \
+    libeigen3-dev \
+    libboost-all-dev \
+    libvtk6.3 \
+    libvtk6-dev \
+    libqhull* \
+    libgtest-dev \
+    freeglut3-dev \
+    pkg-config \
+    libxmu-dev \
+    libxi-dev \
+    mono-complete \
+    libopenni-dev \
+    libopenni2-dev \
+    libpcap-dev \
+    libglew-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libtiff-dev \
+    git \
+    wget
+
+RUN wget https://github.com/PointCloudLibrary/pcl/archive/pcl-1.7.2.tar.gz \
+    && tar -xvf pcl-1.7.2.tar.gz \
+    && cd pcl-pcl-1.7.2 \
+    && mkdir build \
+    && cd build \
+    && cmake .. \
+    && make -j$(nproc) \
+    && make install
+
 FROM ubuntu:focal
+
+COPY --from=builder /usr/local /usr/local
 
 # Set environment variables to avoid interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -55,38 +100,6 @@ RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/ma
 RUN apt-get update && apt-get install -y unzip
 RUN cd ~ && unzip MH_01_easy.zip && rm *.zip
 
-# Install dependencies for PCL 1.7
-RUN apt-get update && apt-get install -y \
-    libflann-dev \
-    libvtk7-dev \
-    libvtk7-qt-dev \
-    libqhull-dev \
-    libusb-1.0-0-dev \
-    libpcap-dev \
-    libpng-dev \
-    libproj-dev
-
-# Clone PCL source code
-RUN git clone https://github.com/PointCloudLibrary/pcl.git /pcl
-WORKDIR /pcl
-RUN git checkout pcl-1.7.1
-
-# Create build directory
-RUN mkdir build
-WORKDIR /pcl/build
-
-# Configure and build PCL with VTK
-RUN cmake .. \
-    -DBUILD_SHARED_LIBS=ON \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr/local \
-    -DPCL_ENABLE_SSE=ON \
-    -DPCL_ENABLE_AVX=ON \
-    -DBUILD_tools=ON \
-    -DBUILD_examples=ON \
-    -DVTK_DIR=/usr/lib/cmake/vtk-7.1
-RUN make -j$(nproc)
-RUN make install
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

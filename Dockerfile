@@ -58,25 +58,45 @@ RUN cd ~ && unzip MH_01_easy.zip && rm *.zip
 # Install dependencies for PCL 1.7
 RUN apt-get update && apt-get install -y \
     libflann-dev \
-    libvtk7-dev \
-    libvtk7-qt-dev \
+    libvtk6-dev \
+    libvtk6-qt-dev \
     libqhull-dev \
     libusb-1.0-0-dev \
     libpcap-dev \
     libpng-dev \
     libproj-dev
 
-# Clone PCL 1.7 repository
-RUN git clone -b pcl-1.7.2 https://github.com/PointCloudLibrary/pcl.git /pcl
-
-# Set the library path
- ENV LD_LIBRARY_PATH /usr/local/lib:$LD_LIBRARY_PATH
-
-# Build and install PCL 1.7
-RUN cd /pcl && mkdir build && cd build && \
-    cmake -DOpenGL_GL_PREFERENCE=GLVND .. && \
-    make -j4 && \
+# Install VTK 6.3
+RUN wget https://www.vtk.org/files/release/6.3/VTK-6.3.0.zip && \
+    unzip VTK-6.3.0.zip && \
+    cd VTK-6.3.0 && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make -j$(nproc) && \
     make install
+
+# Clone PCL source code
+RUN git clone https://github.com/PointCloudLibrary/pcl.git /pcl
+WORKDIR /pcl
+RUN git checkout pcl-1.7.2
+
+# Create build directory
+RUN mkdir build
+WORKDIR /pcl/build
+
+# Configure and build PCL with VTK 6.3
+RUN cmake .. \
+    -DBUILD_SHARED_LIBS=ON \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr/local \
+    -DPCL_ENABLE_SSE=ON \
+    -DPCL_ENABLE_AVX=ON \
+    -DBUILD_tools=ON \
+    -DBUILD_examples=ON \
+    -DVTK_DIR=/usr/local/lib/cmake/vtk-6.3
+RUN make -j$(nproc)
+RUN make install
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

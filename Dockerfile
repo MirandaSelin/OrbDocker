@@ -58,8 +58,8 @@ RUN cd ~ && unzip MH_01_easy.zip && rm *.zip
 # Install dependencies for PCL 1.7
 RUN apt-get update && apt-get install -y \
     libflann-dev \
-    libvtk6-dev \
-    libvtk6-qt-dev \
+    libvtk7-dev \
+    libvtk7-qt-dev \
     libqhull-dev \
     libusb-1.0-0-dev \
     libpcap-dev \
@@ -69,7 +69,7 @@ RUN apt-get update && apt-get install -y \
 # Clone PCL source code
 RUN git clone https://github.com/PointCloudLibrary/pcl.git /pcl
 WORKDIR /pcl
-RUN git checkout pcl-1.7.1
+RUN git checkout pcl-1.7.2
 
 # Create build directory
 RUN mkdir build
@@ -84,7 +84,7 @@ RUN cmake .. \
     -DPCL_ENABLE_AVX=ON \
     -DBUILD_tools=ON \
     -DBUILD_examples=ON \
-    -DVTK_DIR=/usr/lib/vtk-6.3
+    -DVTK_DIR=/usr/lib/cmake/vtk-7.1
 RUN make -j$(nproc)
 RUN make install
 

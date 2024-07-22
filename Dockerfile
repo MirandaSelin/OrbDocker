@@ -4,42 +4,46 @@ FROM ubuntu:14.04 AS builder
 # Set environment variables to avoid interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Add universe repository for additional packages
+RUN apt-get update && apt-get install -y software-properties-common
+RUN add-apt-repository universe
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    cmake \
-    libusb-1.0-0-dev \
-    libeigen3-dev \
-    libflann-dev \
-    libboost-all-dev \
-    libvtk5.8 \
-    libvtk5-dev \
-    libqhull-dev \
-    libgtest-dev \
-    freeglut3-dev \
-    pkg-config \
-    libxmu-dev \
-    libxi-dev \
-    libopenni-dev \
-    libpcap-dev \
-    libglew-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libtiff-dev \
-    git \
-    wget
+    build-essential \
+    cmake \
+    libusb-1.0-0-dev \
+    libeigen3-dev \
+    libflann-dev \
+    libboost-all-dev \
+    libvtk5.8 \
+    libvtk5-dev \
+    libqhull-dev \
+    libgtest-dev \
+    freeglut3-dev \
+    pkg-config \
+    libxmu-dev \
+    libxi-dev \
+    libopenni-dev \
+    libpcap-dev \
+    libglew-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libtiff-dev \
+    git \
+    wget
 
 # Download and extract PCL source code
 RUN wget https://github.com/PointCloudLibrary/pcl/archive/pcl-1.7.2.tar.gz \
-    && tar -xvf pcl-1.7.2.tar.gz
+    && tar -xvf pcl-1.7.2.tar.gz
 
 # Build and install PCL
 RUN cd pcl-pcl-1.7.2 \
-    && mkdir build \
-    && cd build \
-    && cmake .. \
-    && make -j$(nproc) \
-    && make install
+    && mkdir build \
+    && cd build \
+    && cmake .. \
+    && make -j$(nproc) \
+    && make install
 
 # Use a new stage to create a clean final image
 FROM ubuntu:focal

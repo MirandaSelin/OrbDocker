@@ -84,6 +84,10 @@ RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git /root/Dev/ORB_SLAM3 --dept
 WORKDIR /root/Dev/ORB_SLAM3
 RUN patch -p1 < ../Patch/orb_slam3_patch.diff
 
+# Replacing FrameDrawer.cc and MapDrawer.cc so that maps will save
+COPY FrameDrawer.cc /Dev/ORB_SLAM3/src/FrameDrawer.cc
+COPY MapDrawer.cc /Dev/ORB_SLAM3/src/MapDrawer.cc
+
 # Build ORB_SLAM3
 RUN chmod +x build.sh && ./build.sh
 

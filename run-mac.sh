@@ -9,8 +9,8 @@ fi
 # Allow connections from localhost
 xhost + 127.0.0.1
 
-# Set the DISPLAY variable to your specific IP address
-export DISPLAY=10.66.211.80:0
+# Set the DISPLAY variable to the typical value for XQuartz
+export DISPLAY=:0
 
 # Set up XAUTH file path
 XSOCK=/tmp/.X11-unix

@@ -4,28 +4,17 @@
 XSOCK=/tmp/.X11-unix
 XAUTH=/tmp/.docker.xauth
 
-# Ensure DISPLAY is set
-if [ -z "$DISPLAY" ]; then
-    echo "DISPLAY variable is not set. Exiting."
-    exit 1
-fi
-
 # Create the XAUTH file
 touch $XAUTH
 
 # Generate the XAUTH file content for macOS
-xauth_list=$(xauth nlist $DISPLAY 2>/dev/null)
-if [ -z "$xauth_list" ]; then
-    echo "xauth: unable to list any entries for display $DISPLAY"
-    exit 1
-fi
-echo "$xauth_list" | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
+xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 
 # Allow local connections to the X server
 xhost +localhost
 
-# Generate the XAUTH file content for macOS again
-echo "$xauth_list" | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
+# Generate the XAUTH file content for macOS
+xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 
 # Stop and remove old container and image if they exist
 docker stop -t 0 mes-orb-slam

@@ -13,6 +13,9 @@ xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 # Allow local connections to the X server
 xhost +localhost
 
+# Generate the XAUTH file content for macOS
+xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
+
 # Stop and remove old container and image if they exist
 docker stop -t 0 mes-orb-slam
 docker rm -f mes-orb-slam &>/dev/null

@@ -66,6 +66,7 @@ RUN cd ~ && unzip MH_01_easy.zip && rm *.zip
 
 # Copy the patch file into the Docker image
 COPY orb_slam3_patch.diff /root/Dev/Patch/
+COPY src/Viewer.cc /root/Dev/Patch/
 
 # Copy the shell scripts into the image
 COPY mono_euroc.sh /root/Dev/Scripts/mono_euroc.sh
@@ -83,6 +84,9 @@ RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git /root/Dev/ORB_SLAM3 --dept
 # Apply the patch
 WORKDIR /root/Dev/ORB_SLAM3
 RUN patch -p1 < ../Patch/orb_slam3_patch.diff
+
+# Replace Viewer.cc
+COPY ../Patch/Viewer.cc ./src/Viewer.cc
 
 # Build ORB_SLAM3
 RUN chmod +x build.sh && ./build.sh

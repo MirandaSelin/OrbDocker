@@ -1,0 +1,1414 @@
+Last login: Wed Jul 24 10:43:57 on ttys000
+miranda@MacBook-Air-97 ~ % ls
+Applications
+Creative Cloud Files mirandaselin101@gmail.com c304faa3742c53fb342f2f18be57673043ae29d41c04b0b2e06649ec8b368f54
+Desktop
+Documents
+Downloads
+Library
+Movies
+Music
+Pictures
+Public
+Sites
+Zotero
+opt
+ros2_humble
+ros2_venv
+miranda@MacBook-Air-97 ~ % cd Documents/GitHub/OrbDocker
+miranda@MacBook-Air-97 OrbDocker % ./build-mac.sh
+xauth: (argv):1:  unable to read any entries from file "(stdin)"
+localhost being added to access control list
+xauth: (argv):1:  unable to read any entries from file "(stdin)"
+mes-orb-slam
+Untagged: mes-orb-slam:0.1
+Deleted: sha256:cc019bba4ffc15217bf0dd6adf7a941d18527846223886df47e35827f0316094
+[+] Building 0.5s (31/31) FINISHED                         docker:desktop-linux
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 3.23kB                                     0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:focal            0.5s
+ => [auth] library/ubuntu:pull token for registry-1.docker.io              0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [ 1/25] FROM docker.io/library/ubuntu:focal@sha256:0b897358ff6624825f  0.0s
+ => [internal] load build context                                          0.0s
+ => => transferring context: 2.28kB                                        0.0s
+ => CACHED [ 2/25] RUN apt-get update && apt-get install -y     git     c  0.0s
+ => CACHED [ 3/25] RUN cd /tmp && git clone https://github.com/stevenlove  0.0s
+ => CACHED [ 4/25] RUN echo "Testing network connectivity..." &&     ping  0.0s
+ => CACHED [ 5/25] RUN cd /tmp &&     echo "Cloning OpenCV repository..."  0.0s
+ => CACHED [ 6/25] RUN wget -qO - https://download.sublimetext.com/sublim  0.0s
+ => CACHED [ 7/25] RUN echo "deb https://download.sublimetext.com/ apt/st  0.0s
+ => CACHED [ 8/25] RUN apt update && apt install -y sublime-text           0.0s
+ => CACHED [ 9/25] RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets  0.0s
+ => CACHED [10/25] RUN apt-get update && apt-get install -y unzip          0.0s
+ => CACHED [11/25] RUN cd ~ && unzip MH_01_easy.zip && rm *.zip            0.0s
+ => CACHED [12/25] COPY orb_slam3_patch.diff /root/Dev/Patch/              0.0s
+ => CACHED [13/25] COPY mono_euroc.sh /root/Dev/Scripts/mono_euroc.sh      0.0s
+ => CACHED [14/25] COPY mono_inertial_euroc.sh /root/Dev/Scripts/mono_ine  0.0s
+ => CACHED [15/25] COPY mono_webcam.sh /root/Dev/Scripts/mono_webcam.sh    0.0s
+ => CACHED [16/25] RUN chmod +x /root/Dev/Scripts/mono_euroc.sh            0.0s
+ => CACHED [17/25] RUN chmod +x /root/Dev/Scripts/mono_inertial_euroc.sh   0.0s
+ => CACHED [18/25] RUN chmod +x /root/Dev/Scripts/mono_webcam.sh           0.0s
+ => CACHED [19/25] RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git   0.0s
+ => CACHED [20/25] WORKDIR /root/Dev/ORB_SLAM3                             0.0s
+ => CACHED [21/25] RUN patch -p1 < ../Patch/orb_slam3_patch.diff           0.0s
+ => CACHED [22/25] RUN chmod +x build.sh && ./build.sh                     0.0s
+ => CACHED [23/25] WORKDIR /root                                           0.0s
+ => CACHED [24/25] COPY ./src ./src                                        0.0s
+ => CACHED [25/25] RUN cd ~/src/build && cmake .. && make                  0.0s
+ => exporting to image                                                     0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:cc019bba4ffc15217bf0dd6adf7a941d1852784622388  0.0s
+ => => naming to docker.io/library/mes-orb-slam:0.1                        0.0s
+
+What's next:
+    View a summary of image vulnerabilities and recommendations → docker scout quickview 
+miranda@MacBook-Air-97 OrbDocker % ./run-mac.sh                 
+127.0.0.1 being added to access control list
+xauth: (argv):1:  unable to read any entries from file "(stdin)"
+8a55b9f5d1d942a68a14d8f6af5046eab3eb7e7154b6d9a6f8b912d0bffc7a3e
+10.66.211.80:0
+miranda@MacBook-Air-97 OrbDocker % open -a XQuartz
+
+miranda@MacBook-Air-97 OrbDocker % open -a XQuartz
+
+miranda@MacBook-Air-97 OrbDocker % xhost +
+
+access control disabled, clients can connect from any host
+miranda@MacBook-Air-97 OrbDocker % ls
+Dockerfile		mono_euroc.sh		orb_slam3_patch.diff
+README.md		mono_inertial_euroc.sh	run-mac.sh
+build-mac.sh		mono_webcam.sh		run.sh
+build.sh		open.sh			src
+miranda@MacBook-Air-97 OrbDocker % ./build-mac.sh
+xauth: (argv):1:  unable to read any entries from file "(stdin)"
+localhost being added to access control list
+xauth: (argv):1:  unable to read any entries from file "(stdin)"
+mes-orb-slam
+Untagged: mes-orb-slam:0.1
+Deleted: sha256:cc019bba4ffc15217bf0dd6adf7a941d18527846223886df47e35827f0316094
+[+] Building 0.3s (30/30) FINISHED                         docker:desktop-linux
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 3.23kB                                     0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:focal            0.3s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [ 1/25] FROM docker.io/library/ubuntu:focal@sha256:0b897358ff6624825f  0.0s
+ => [internal] load build context                                          0.0s
+ => => transferring context: 2.28kB                                        0.0s
+ => CACHED [ 2/25] RUN apt-get update && apt-get install -y     git     c  0.0s
+ => CACHED [ 3/25] RUN cd /tmp && git clone https://github.com/stevenlove  0.0s
+ => CACHED [ 4/25] RUN echo "Testing network connectivity..." &&     ping  0.0s
+ => CACHED [ 5/25] RUN cd /tmp &&     echo "Cloning OpenCV repository..."  0.0s
+ => CACHED [ 6/25] RUN wget -qO - https://download.sublimetext.com/sublim  0.0s
+ => CACHED [ 7/25] RUN echo "deb https://download.sublimetext.com/ apt/st  0.0s
+ => CACHED [ 8/25] RUN apt update && apt install -y sublime-text           0.0s
+ => CACHED [ 9/25] RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets  0.0s
+ => CACHED [10/25] RUN apt-get update && apt-get install -y unzip          0.0s
+ => CACHED [11/25] RUN cd ~ && unzip MH_01_easy.zip && rm *.zip            0.0s
+ => CACHED [12/25] COPY orb_slam3_patch.diff /root/Dev/Patch/              0.0s
+ => CACHED [13/25] COPY mono_euroc.sh /root/Dev/Scripts/mono_euroc.sh      0.0s
+ => CACHED [14/25] COPY mono_inertial_euroc.sh /root/Dev/Scripts/mono_ine  0.0s
+ => CACHED [15/25] COPY mono_webcam.sh /root/Dev/Scripts/mono_webcam.sh    0.0s
+ => CACHED [16/25] RUN chmod +x /root/Dev/Scripts/mono_euroc.sh            0.0s
+ => CACHED [17/25] RUN chmod +x /root/Dev/Scripts/mono_inertial_euroc.sh   0.0s
+ => CACHED [18/25] RUN chmod +x /root/Dev/Scripts/mono_webcam.sh           0.0s
+ => CACHED [19/25] RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git   0.0s
+ => CACHED [20/25] WORKDIR /root/Dev/ORB_SLAM3                             0.0s
+ => CACHED [21/25] RUN patch -p1 < ../Patch/orb_slam3_patch.diff           0.0s
+ => CACHED [22/25] RUN chmod +x build.sh && ./build.sh                     0.0s
+ => CACHED [23/25] WORKDIR /root                                           0.0s
+ => CACHED [24/25] COPY ./src ./src                                        0.0s
+ => CACHED [25/25] RUN cd ~/src/build && cmake .. && make                  0.0s
+ => exporting to image                                                     0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:cc019bba4ffc15217bf0dd6adf7a941d1852784622388  0.0s
+ => => naming to docker.io/library/mes-orb-slam:0.1                        0.0s
+
+What's next:
+    View a summary of image vulnerabilities and recommendations → docker scout quickview 
+miranda@MacBook-Air-97 OrbDocker % nano ~/.Xauthority
+miranda@MacBook-Air-97 OrbDocker % rm ~/.Xauthority
+
+miranda@MacBook-Air-97 OrbDocker % xauth add $(xauth list $DISPLAY | tail -1)
+
+xauth: (argv):1:  bad "add" command line
+miranda@MacBook-Air-97 OrbDocker % echo $DISPLAY
+
+/private/tmp/com.apple.launchd.x3MY7VnHG2/org.xquartz:0
+miranda@MacBook-Air-97 OrbDocker % xauth list $DISPLAY
+
+miranda@MacBook-Air-97 OrbDocker % chmod +x build.sh
+miranda@MacBook-Air-97 OrbDocker % chmod +x run.sh  
+miranda@MacBook-Air-97 OrbDocker % chmod +x build.sh
+miranda@MacBook-Air-97 OrbDocker % chmod +x run.sh  
+miranda@MacBook-Air-97 OrbDocker % ls
+Dockerfile		mono_euroc.sh		orb_slam3_patch.diff
+README.md		mono_inertial_euroc.sh	run-mac.sh
+build-mac.sh		mono_webcam.sh		run.sh
+build.sh		open.sh			src
+miranda@MacBook-Air-97 OrbDocker % ./build.sh
+xauth: (argv):1:  unable to read any entries from file "(stdin)"
+non-network local connections being added to access control list
+Cannot connect to the Docker daemon at unix:///Users/miranda/.docker/run/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///Users/miranda/.docker/run/docker.sock. Is the docker daemon running?
+ERROR: Cannot connect to the Docker daemon at unix:///Users/miranda/.docker/run/docker.sock. Is the docker daemon running?
+miranda@MacBook-Air-97 OrbDocker % ./build.sh
+xauth: (argv):1:  unable to read any entries from file "(stdin)"
+non-network local connections being added to access control list
+Error response from daemon: No such container: mes-orb-slam
+Untagged: mes-orb-slam:0.1
+Deleted: sha256:cc019bba4ffc15217bf0dd6adf7a941d18527846223886df47e35827f0316094
+[+] Building 6.9s (24/30)                                  docker:desktop-linux
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 3.23kB                                     0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:focal            0.7s
+ => [auth] library/ubuntu:pull token for registry-1.docker.io              0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load build context                                          0.0s
+ => => transferring context: 31.69kB                                       0.0s
+ => [ 1/25] FROM docker.io/library/ubuntu:focal@sha256:0b897358ff6624825f  0.0s
+ => CACHED [ 2/25] RUN apt-get update && apt-get install -y     git     c  0.0s
+ => CACHED [ 3/25] RUN cd /tmp && git clone https://github.com/stevenlove  0.0s
+ => CACHED [ 4/25] RUN echo "Testing network connectivity..." &&     ping  0.0s
+ => CACHED [ 5/25] RUN cd /tmp &&     echo "Cloning OpenCV repository..."  0.0s
+ => CACHED [ 6/25] RUN wget -qO - https://download.sublimetext.com/sublim  0.0s
+ => CACHED [ 7/25] RUN echo "deb https://download.sublimetext.com/ apt/st  0.0s
+ => CACHED [ 8/25] RUN apt update && apt install -y sublime-text           0.0s
+ => CACHED [ 9/25] RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets  0.0s
+ => CACHED [10/25] RUN apt-get update && apt-get install -y unzip          0.0s
+ => CACHED [11/25] RUN cd ~ && unzip MH_01_easy.zip && rm *.zip            0.0s
+ => [12/25] COPY orb_slam3_patch.diff /root/Dev/Patch/                     0.0s
+ => [13/25] COPY mono_euroc.sh /root/Dev/Scripts/mono_euroc.sh             0.0s
+ => [14/25] COPY mono_inertial_euroc.sh /root/Dev/Scripts/mono_inertial_e  0.0s
+ => [15/25] COPY mono_webcam.sh /root/Dev/Scripts/mono_webcam.sh           0.0s
+ => [16/25] RUN chmod +x /root/Dev/Scripts/mono_euroc.sh                   0.1s
+ => [17/25] RUN chmod +x /root/Dev/Scripts/mono_inertial_euroc.sh          0.1s
+ => [18/25] RUN chmod +x /root/Dev/Scripts/mono_webcam.sh                  0.1s
+ => CANCELED [19/25] RUN git clone https://github.com/aPR0T0/ORB_SLAM3.gi  5.8s
+ERROR: failed to solve: Canceled: context canceled
+miranda@MacBook-Air-97 OrbDocker % ./build.sh
+xauth: (argv):1:  unable to read any entries from file "(stdin)"
+non-network local connections being added to access control list
+Error response from daemon: No such container: mes-orb-slam
+Error response from daemon: No such image: mes-orb-slam:0.1
+[+] Building 232.6s (30/30) FINISHED                       docker:desktop-linux
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 3.23kB                                     0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:focal            0.2s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [ 1/25] FROM docker.io/library/ubuntu:focal@sha256:0b897358ff6624825f  0.0s
+ => [internal] load build context                                          0.0s
+ => => transferring context: 17.42kB                                       0.0s
+ => CACHED [ 2/25] RUN apt-get update && apt-get install -y     git     c  0.0s
+ => CACHED [ 3/25] RUN cd /tmp && git clone https://github.com/stevenlove  0.0s
+ => CACHED [ 4/25] RUN echo "Testing network connectivity..." &&     ping  0.0s
+ => CACHED [ 5/25] RUN cd /tmp &&     echo "Cloning OpenCV repository..."  0.0s
+ => CACHED [ 6/25] RUN wget -qO - https://download.sublimetext.com/sublim  0.0s
+ => CACHED [ 7/25] RUN echo "deb https://download.sublimetext.com/ apt/st  0.0s
+ => CACHED [ 8/25] RUN apt update && apt install -y sublime-text           0.0s
+ => CACHED [ 9/25] RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets  0.0s
+ => CACHED [10/25] RUN apt-get update && apt-get install -y unzip          0.0s
+ => CACHED [11/25] RUN cd ~ && unzip MH_01_easy.zip && rm *.zip            0.0s
+ => [12/25] COPY orb_slam3_patch.diff /root/Dev/Patch/                     0.0s
+ => [13/25] COPY mono_euroc.sh /root/Dev/Scripts/mono_euroc.sh             0.0s
+ => [14/25] COPY mono_inertial_euroc.sh /root/Dev/Scripts/mono_inertial_e  0.0s
+ => [15/25] COPY mono_webcam.sh /root/Dev/Scripts/mono_webcam.sh           0.0s
+ => [16/25] RUN chmod +x /root/Dev/Scripts/mono_euroc.sh                   0.1s
+ => [17/25] RUN chmod +x /root/Dev/Scripts/mono_inertial_euroc.sh          0.1s
+ => [18/25] RUN chmod +x /root/Dev/Scripts/mono_webcam.sh                  0.1s
+ => [19/25] RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git /root/  21.8s
+ => [20/25] WORKDIR /root/Dev/ORB_SLAM3                                    0.0s
+ => [21/25] RUN patch -p1 < ../Patch/orb_slam3_patch.diff                  0.1s
+ => [22/25] RUN chmod +x build.sh && ./build.sh                          208.2s
+ => [23/25] WORKDIR /root                                                  0.0s
+ => [24/25] COPY ./src ./src                                               0.0s
+ => [25/25] RUN cd ~/src/build && cmake .. && make                         0.4s
+ => exporting to image                                                     1.6s
+ => => exporting layers                                                    1.6s
+ => => writing image sha256:46b4e4c363751183a0f28ce29accbbe8d63dc10efc96c  0.0s
+ => => naming to docker.io/library/mes-orb-slam:0.1                        0.0s
+
+What's next:
+    View a summary of image vulnerabilities and recommendations → docker scout quickview 
+miranda@MacBook-Air-97 OrbDocker % ./build.sh
+xauth: (argv):1:  unable to read any entries from file "(stdin)"
+non-network local connections being added to access control list
+Error response from daemon: No such container: mes-orb-slam
+Untagged: mes-orb-slam:0.1
+Deleted: sha256:46b4e4c363751183a0f28ce29accbbe8d63dc10efc96c524bafc24ffc8329ff6
+[+] Building 0.5s (30/30) FINISHED                         docker:desktop-linux
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 3.23kB                                     0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:focal            0.4s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [ 1/25] FROM docker.io/library/ubuntu:focal@sha256:0b897358ff6624825f  0.0s
+ => [internal] load build context                                          0.0s
+ => => transferring context: 2.23kB                                        0.0s
+ => CACHED [ 2/25] RUN apt-get update && apt-get install -y     git     c  0.0s
+ => CACHED [ 3/25] RUN cd /tmp && git clone https://github.com/stevenlove  0.0s
+ => CACHED [ 4/25] RUN echo "Testing network connectivity..." &&     ping  0.0s
+ => CACHED [ 5/25] RUN cd /tmp &&     echo "Cloning OpenCV repository..."  0.0s
+ => CACHED [ 6/25] RUN wget -qO - https://download.sublimetext.com/sublim  0.0s
+ => CACHED [ 7/25] RUN echo "deb https://download.sublimetext.com/ apt/st  0.0s
+ => CACHED [ 8/25] RUN apt update && apt install -y sublime-text           0.0s
+ => CACHED [ 9/25] RUN cd ~ && wget http://robotics.ethz.ch/~asl-datasets  0.0s
+ => CACHED [10/25] RUN apt-get update && apt-get install -y unzip          0.0s
+ => CACHED [11/25] RUN cd ~ && unzip MH_01_easy.zip && rm *.zip            0.0s
+ => CACHED [12/25] COPY orb_slam3_patch.diff /root/Dev/Patch/              0.0s
+ => CACHED [13/25] COPY mono_euroc.sh /root/Dev/Scripts/mono_euroc.sh      0.0s
+ => CACHED [14/25] COPY mono_inertial_euroc.sh /root/Dev/Scripts/mono_ine  0.0s
+ => CACHED [15/25] COPY mono_webcam.sh /root/Dev/Scripts/mono_webcam.sh    0.0s
+ => CACHED [16/25] RUN chmod +x /root/Dev/Scripts/mono_euroc.sh            0.0s
+ => CACHED [17/25] RUN chmod +x /root/Dev/Scripts/mono_inertial_euroc.sh   0.0s
+ => CACHED [18/25] RUN chmod +x /root/Dev/Scripts/mono_webcam.sh           0.0s
+ => CACHED [19/25] RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git   0.0s
+ => CACHED [20/25] WORKDIR /root/Dev/ORB_SLAM3                             0.0s
+ => CACHED [21/25] RUN patch -p1 < ../Patch/orb_slam3_patch.diff           0.0s
+ => CACHED [22/25] RUN chmod +x build.sh && ./build.sh                     0.0s
+ => CACHED [23/25] WORKDIR /root                                           0.0s
+ => CACHED [24/25] COPY ./src ./src                                        0.0s
+ => CACHED [25/25] RUN cd ~/src/build && cmake .. && make                  0.0s
+ => exporting to image                                                     0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:46b4e4c363751183a0f28ce29accbbe8d63dc10efc96c  0.0s
+ => => naming to docker.io/library/mes-orb-slam:0.1                        0.0s
+
+What's next:
+    View a summary of image vulnerabilities and recommendations → docker scout quickview 
+miranda@MacBook-Air-97 OrbDocker % ./run.sh
+non-network local connections being added to access control list
+c3ed071863739f90c762641cb83c01a1fab9b9f9a066c8ba4e91e5f3435f51cb
+miranda@MacBook-Air-97 OrbDocker % ./open.sh
+root@docker-desktop:~# subl .
+root@docker-desktop:~# subl .
+root@docker-desktop:~# ls
+Dev  mav0  src
+root@docker-desktop:~# cd Dev
+root@docker-desktop:~/Dev# ls
+ORB_SLAM3  Patch  Scripts
+root@docker-desktop:~/Dev# cd O*/src
+root@docker-desktop:~/Dev/ORB_SLAM3/src# ls
+Atlas.cc           KeyFrame.cc          ORBmatcher.cc
+CameraModels       KeyFrameDatabase.cc  OptimizableTypes.cpp
+Config.cc          LocalMapping.cc      Optimizer.cc
+Converter.cc       LoopClosing.cc       Settings.cc
+Frame.cc           MLPnPsolver.cpp      Sim3Solver.cc
+FrameDrawer.cc     Map.cc               System.cc
+G2oTypes.cc        MapDrawer.cc         Tracking.cc
+GeometricTools.cc  MapPoint.cc          TwoViewReconstruction.cc
+ImuTypes.cc        ORBextractor.cc      Viewer.cc
+root@docker-desktop:~/Dev/ORB_SLAM3/src# nano Viewer.cc
+root@docker-desktop:~/Dev/ORB_SLAM3/src# nano Viewer.cc
+root@docker-desktop:~/Dev/ORB_SLAM3/src# git diff
+diff --git a/Examples/Monocular/mono_euroc.cc b/Examples/Monocular/mono_euroc.cc
+index fc5ed0d..7f54f5b 100644
+--- a/Examples/Monocular/mono_euroc.cc
++++ b/Examples/Monocular/mono_euroc.cc
+@@ -80,7 +80,7 @@ int main(int argc, char **argv)
+     int fps = 20;
+     float dT = 1.f/fps;
+     // Create SLAM system. It initializes all system threads and gets ready to process frames.
+-    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::MONOCULAR, false);
++    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::MONOCULAR, true);
+     float imageScale = SLAM.GetImageScale();
+ 
+     double t_resize = 0.f;
+diff --git a/Examples/Monocular/mono_kitti.cc b/Examples/Monocular/mono_kitti.cc
+index d1a4ac6..f147e6c 100644
+--- a/Examples/Monocular/mono_kitti.cc
++++ b/Examples/Monocular/mono_kitti.cc
+@@ -1,186 +1,41 @@
+-/**
+-* This file is part of ORB-SLAM3
+-*
+-* Copyright (C) 2017-2021 Carlos Campos, Richard Elvira, Juan J. G<C3><B3>mez Rodr<C3><AD>guez, Jos
+<C3><A9> M.M. Montiel and Juan D. Tard<C3><B3>s, University of Zaragoza.
+-* Copyright (C) 2014-2016 Ra<C3><BA>l Mur-Artal, Jos<C3><A9> M.M. Montiel and Juan D. Tard<C3><B3>s, University of Zaragoza.
+-*
+-* ORB-SLAM3 is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+-* License as published by the Free Software Foundation, either version 3 of the License, or
+-* (at your option) any later version.
+-*
+-* ORB-SLAM3 is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+-* the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+-* GNU General Public License for more details.
+-*
+-* You should have received a copy of the GNU General Public License along with ORB-SLAM3.
+-* If not, see <http://www.gnu.org/licenses/>.
+-*/
+-
+-#include<iostream>
+-#include<algorithm>
+-#include<fstream>
+-#include<chrono>
+-#include<iomanip>
+-
+-#include<opencv2/core/core.hpp>
+-
+-#include"System.h"
+-
+-using namespace std;
+-
+-void LoadImages(const string &strSequence, vector<string> &vstrImageFilenames,
+-                vector<double> &vTimestamps);
+-
+-int main(int argc, char **argv)
+-{
+-    if(argc != 4)
+-    {
+-        cerr << endl << "Usage: ./mono_kitti path_to_vocabulary path_to_settings path_to_sequence" << endl;
++#include <opencv2/opencv.hpp>
++
++int main() {
++    // Open the default camera (typically the first camera)
++    cv::VideoCapture cap(0);
++    
++    // Check if the camera opened successfully
++    if (!cap.isOpened()) {
++        std::cerr << "Error: Could not open camera" << std::endl;
+         return 1;
+     }
+-
+-    // Retrieve paths to images
+-    vector<string> vstrImageFilenames;
+-    vector<double> vTimestamps;
+-    LoadImages(string(argv[3]), vstrImageFilenames, vTimestamps);
+-
+-    int nImages = vstrImageFilenames.size();
+-
+-    // Create SLAM system. It initializes all system threads and gets ready to process frames.
+-    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::MONOCULAR,true);
+-    float imageScale = SLAM.GetImageScale();
+-
+-    // Vector for tracking time statistics
+-    vector<float> vTimesTrack;
+-    vTimesTrack.resize(nImages);
+-
+-    cout << endl << "-------" << endl;
+-    cout << "Start processing sequence ..." << endl;
+-    cout << "Images in the sequence: " << nImages << endl << endl;
+-
+-    // Main loop
+-    double t_resize = 0.f;
+-    double t_track = 0.f;
+-
+-    cv::Mat im;
+-    for(int ni=0; ni<nImages; ni++)
+-    {
+-        // Read image from file
+-        im = cv::imread(vstrImageFilenames[ni],cv::IMREAD_UNCHANGED); //,cv::IMREAD_UNCHANGED);
+-        double tframe = vTimestamps[ni];
+-
+-        if(im.empty())
+-        {
+-            cerr << endl << "Failed to load image at: " << vstrImageFilenames[ni] << endl;
+-            return 1;
++    
++    // Create a window to display the camera feed
++    cv::namedWindow("Camera Feed", cv::WINDOW_NORMAL);
++    
++    // Main loop to capture and display frames from the camera
++    while (true) {
++        cv::Mat frame;
++        // Capture frame-by-frame
++        cap >> frame;
++        
++        // Check if the frame is empty
++        if (frame.empty()) {
++            std::cerr << "Error: Frame is empty" << std::endl;
++            break;
+         }
+-
+-        if(imageScale != 1.f)
+-        {
+-#ifdef REGISTER_TIMES
+-    #ifdef COMPILEDWITHC14
+-            std::chrono::steady_clock::time_point t_Start_Resize = std::chrono::steady_clock::now();
+-    #else
+-            std::chrono::monotonic_clock::time_point t_Start_Resize = std::chrono::monotonic_clock::now();
+-    #endif
+-#endif
+-            int width = im.cols * imageScale;
+-            int height = im.rows * imageScale;
+-            cv::resize(im, im, cv::Size(width, height));
+-#ifdef REGISTER_TIMES
+-    #ifdef COMPILEDWITHC14
+-            std::chrono::steady_clock::time_point t_End_Resize = std::chrono::steady_clock::now();
+-    #else
+-            std::chrono::monotonic_clock::time_point t_End_Resize = std::chrono::monotonic_clock::now();
+-    #endif
+-            t_resize = std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t_End_Resize - t_Start_Resize).count();
+-            SLAM.InsertResizeTime(t_resize);
+-#endif
+-        }
+-
+-#ifdef COMPILEDWITHC14
+-        std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+-#else
+-        std::chrono::monotonic_clock::time_point t1 = std::chrono::monotonic_clock::now();
+-#endif
+-
+-        // Pass the image to the SLAM system
+-        SLAM.TrackMonocular(im,tframe,vector<ORB_SLAM3::IMU::Point>(), vstrImageFilenames[ni]);
+-
+-#ifdef COMPILEDWITHC14
+-        std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
+-#else
+-        std::chrono::monotonic_clock::time_point t2 = std::chrono::monotonic_clock::now();
+-#endif
+-
+-#ifdef REGISTER_TIMES
+-            t_track = t_resize + std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t2 - t1).count();
+-            SLAM.InsertTrackTime(t_track);
+-#endif
+-
+-        double ttrack= std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
+-
+-        vTimesTrack[ni]=ttrack;
+-
+-        // Wait to load the next frame
+-        double T=0;
+-        if(ni<nImages-1)
+-            T = vTimestamps[ni+1]-tframe;
+-        else if(ni>0)
+-            T = tframe-vTimestamps[ni-1];
+-
+-        if(ttrack<T)
+-            usleep((T-ttrack)*1e6);
+-    }
+-
+-    // Stop all threads
+-    SLAM.Shutdown();
+-
+-    // Tracking time statistics
+-    sort(vTimesTrack.begin(),vTimesTrack.end());
+-    float totaltime = 0;
+-    for(int ni=0; ni<nImages; ni++)
+-    {
+
+root@docker-desktop:~/Dev/ORB_SLAM3/src# git diff > patch.diff
+root@docker-desktop:~/Dev/ORB_SLAM3/src# cat patch.diff
+diff --git a/Examples/Monocular/mono_euroc.cc b/Examples/Monocular/mono_euroc.cc
+index fc5ed0d..7f54f5b 100644
+--- a/Examples/Monocular/mono_euroc.cc
++++ b/Examples/Monocular/mono_euroc.cc
+@@ -80,7 +80,7 @@ int main(int argc, char **argv)
+     int fps = 20;
+     float dT = 1.f/fps;
+     // Create SLAM system. It initializes all system threads and gets ready to process frames.
+-    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::MONOCULAR, false);
++    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::MONOCULAR, true);
+     float imageScale = SLAM.GetImageScale();
+ 
+     double t_resize = 0.f;
+diff --git a/Examples/Monocular/mono_kitti.cc b/Examples/Monocular/mono_kitti.cc
+index d1a4ac6..f147e6c 100644
+--- a/Examples/Monocular/mono_kitti.cc
++++ b/Examples/Monocular/mono_kitti.cc
+@@ -1,186 +1,41 @@
+-/**
+-* This file is part of ORB-SLAM3
+-*
+-* Copyright (C) 2017-2021 Carlos Campos, Richard Elvira, Juan J. Gómez Rodríguez, José M.M. Montiel and Juan D. Tardós, University of Zaragoza.
+-* Copyright (C) 2014-2016 Raúl Mur-Artal, José M.M. Montiel and Juan D. Tardós, University of Zaragoza.
+-*
+-* ORB-SLAM3 is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+-* License as published by the Free Software Foundation, either version 3 of the License, or
+-* (at your option) any later version.
+-*
+-* ORB-SLAM3 is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+-* the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+-* GNU General Public License for more details.
+-*
+-* You should have received a copy of the GNU General Public License along with ORB-SLAM3.
+-* If not, see <http://www.gnu.org/licenses/>.
+-*/
+-
+-#include<iostream>
+-#include<algorithm>
+-#include<fstream>
+-#include<chrono>
+-#include<iomanip>
+-
+-#include<opencv2/core/core.hpp>
+-
+-#include"System.h"
+-
+-using namespace std;
+-
+-void LoadImages(const string &strSequence, vector<string> &vstrImageFilenames,
+-                vector<double> &vTimestamps);
+-
+-int main(int argc, char **argv)
+-{
+-    if(argc != 4)
+-    {
+-        cerr << endl << "Usage: ./mono_kitti path_to_vocabulary path_to_settings path_to_sequence" << endl;
++#include <opencv2/opencv.hpp>
++
++int main() {
++    // Open the default camera (typically the first camera)
++    cv::VideoCapture cap(0);
++    
++    // Check if the camera opened successfully
++    if (!cap.isOpened()) {
++        std::cerr << "Error: Could not open camera" << std::endl;
+         return 1;
+     }
+-
+-    // Retrieve paths to images
+-    vector<string> vstrImageFilenames;
+-    vector<double> vTimestamps;
+-    LoadImages(string(argv[3]), vstrImageFilenames, vTimestamps);
+-
+-    int nImages = vstrImageFilenames.size();
+-
+-    // Create SLAM system. It initializes all system threads and gets ready to process frames.
+-    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::MONOCULAR,true);
+-    float imageScale = SLAM.GetImageScale();
+-
+-    // Vector for tracking time statistics
+-    vector<float> vTimesTrack;
+-    vTimesTrack.resize(nImages);
+-
+-    cout << endl << "-------" << endl;
+-    cout << "Start processing sequence ..." << endl;
+-    cout << "Images in the sequence: " << nImages << endl << endl;
+-
+-    // Main loop
+-    double t_resize = 0.f;
+-    double t_track = 0.f;
+-
+-    cv::Mat im;
+-    for(int ni=0; ni<nImages; ni++)
+-    {
+-        // Read image from file
+-        im = cv::imread(vstrImageFilenames[ni],cv::IMREAD_UNCHANGED); //,cv::IMREAD_UNCHANGED);
+-        double tframe = vTimestamps[ni];
+-
+-        if(im.empty())
+-        {
+-            cerr << endl << "Failed to load image at: " << vstrImageFilenames[ni] << endl;
+-            return 1;
++    
++    // Create a window to display the camera feed
++    cv::namedWindow("Camera Feed", cv::WINDOW_NORMAL);
++    
++    // Main loop to capture and display frames from the camera
++    while (true) {
++        cv::Mat frame;
++        // Capture frame-by-frame
++        cap >> frame;
++        
++        // Check if the frame is empty
++        if (frame.empty()) {
++            std::cerr << "Error: Frame is empty" << std::endl;
++            break;
+         }
+-
+-        if(imageScale != 1.f)
+-        {
+-#ifdef REGISTER_TIMES
+-    #ifdef COMPILEDWITHC14
+-            std::chrono::steady_clock::time_point t_Start_Resize = std::chrono::steady_clock::now();
+-    #else
+-            std::chrono::monotonic_clock::time_point t_Start_Resize = std::chrono::monotonic_clock::now();
+-    #endif
+-#endif
+-            int width = im.cols * imageScale;
+-            int height = im.rows * imageScale;
+-            cv::resize(im, im, cv::Size(width, height));
+-#ifdef REGISTER_TIMES
+-    #ifdef COMPILEDWITHC14
+-            std::chrono::steady_clock::time_point t_End_Resize = std::chrono::steady_clock::now();
+-    #else
+-            std::chrono::monotonic_clock::time_point t_End_Resize = std::chrono::monotonic_clock::now();
+-    #endif
+-            t_resize = std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t_End_Resize - t_Start_Resize).count();
+-            SLAM.InsertResizeTime(t_resize);
+-#endif
+-        }
+-
+-#ifdef COMPILEDWITHC14
+-        std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+-#else
+-        std::chrono::monotonic_clock::time_point t1 = std::chrono::monotonic_clock::now();
+-#endif
+-
+-        // Pass the image to the SLAM system
+-        SLAM.TrackMonocular(im,tframe,vector<ORB_SLAM3::IMU::Point>(), vstrImageFilenames[ni]);
+-
+-#ifdef COMPILEDWITHC14
+-        std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
+-#else
+-        std::chrono::monotonic_clock::time_point t2 = std::chrono::monotonic_clock::now();
+-#endif
+-
+-#ifdef REGISTER_TIMES
+-            t_track = t_resize + std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t2 - t1).count();
+-            SLAM.InsertTrackTime(t_track);
+-#endif
+-
+-        double ttrack= std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
+-
+-        vTimesTrack[ni]=ttrack;
+-
+-        // Wait to load the next frame
+-        double T=0;
+-        if(ni<nImages-1)
+-            T = vTimestamps[ni+1]-tframe;
+-        else if(ni>0)
+-            T = tframe-vTimestamps[ni-1];
+-
+-        if(ttrack<T)
+-            usleep((T-ttrack)*1e6);
+-    }
+-
+-    // Stop all threads
+-    SLAM.Shutdown();
+-
+-    // Tracking time statistics
+-    sort(vTimesTrack.begin(),vTimesTrack.end());
+-    float totaltime = 0;
+-    for(int ni=0; ni<nImages; ni++)
+-    {
+-        totaltime+=vTimesTrack[ni];
++        
++        // Display the frame in the window
++        cv::imshow("Camera Feed", frame);
++        
++        // Check for ESC key press to exit the loop
++        if (cv::waitKey(1) == 27) // ESC key
++            break;
+     }
+-    cout << "-------" << endl << endl;
+-    cout << "median tracking time: " << vTimesTrack[nImages/2] << endl;
+-    cout << "mean tracking time: " << totaltime/nImages << endl;
+-
+-    // Save camera trajectory
+-    SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");    
+-
++    
++    // Release the camera and close all windows
++    cap.release();
++    cv::destroyAllWindows();
++    
+     return 0;
+-}
+-
+-void LoadImages(const string &strPathToSequence, vector<string> &vstrImageFilenames, vector<double> &vTimestamps)
+-{
+-    ifstream fTimes;
+-    string strPathTimeFile = strPathToSequence + "/times.txt";
+-    fTimes.open(strPathTimeFile.c_str());
+-    while(!fTimes.eof())
+-    {
+-        string s;
+-        getline(fTimes,s);
+-        if(!s.empty())
+-        {
+-            stringstream ss;
+-            ss << s;
+-            double t;
+-            ss >> t;
+-            vTimestamps.push_back(t);
+-        }
+-    }
+-
+-    string strPrefixLeft = strPathToSequence + "/image_0/";
+-
+-    const int nTimes = vTimestamps.size();
+-    vstrImageFilenames.resize(nTimes);
+-
+-    for(int i=0; i<nTimes; i++)
+-    {
+-        stringstream ss;
+-        ss << setfill('0') << setw(6) << i;
+-        vstrImageFilenames[i] = strPrefixLeft + ss.str() + ".png";
+-    }
+-}
++}
+\ No newline at end of file
+diff --git a/Examples/Monocular/mono_tum.cc b/Examples/Monocular/mono_tum.cc
+index 97c91cf..a97bd84 100644
+--- a/Examples/Monocular/mono_tum.cc
++++ b/Examples/Monocular/mono_tum.cc
+@@ -1,78 +1,54 @@
+-/**
+-* This file is part of ORB-SLAM3
+-*
+-* Copyright (C) 2017-2021 Carlos Campos, Richard Elvira, Juan J. Gómez Rodríguez, José M.M. Montiel and Juan D. Tardós, University of Zaragoza.
+-* Copyright (C) 2014-2016 Raúl Mur-Artal, José M.M. Montiel and Juan D. Tardós, University of Zaragoza.
+-*
+-* ORB-SLAM3 is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+-* License as published by the Free Software Foundation, either version 3 of the License, or
+-* (at your option) any later version.
+-*
+-* ORB-SLAM3 is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+-* the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+-* GNU General Public License for more details.
+-*
+-* You should have received a copy of the GNU General Public License along with ORB-SLAM3.
+-* If not, see <http://www.gnu.org/licenses/>.
+-*/
+-
+ #include<iostream>
+ #include<algorithm>
+ #include<fstream>
+ #include<chrono>
+ 
+ #include<opencv2/core/core.hpp>
+-
++#include<opencv2/highgui/highgui.hpp>
+ #include<System.h>
+ 
+ using namespace std;
+ 
+-void LoadImages(const string &strFile, vector<string> &vstrImageFilenames,
+-                vector<double> &vTimestamps);
+-
+ int main(int argc, char **argv)
+-{
+-    if(argc != 4)
++{  
++    if(argc != 3)
+     {
+-        cerr << endl << "Usage: ./mono_tum path_to_vocabulary path_to_settings path_to_sequence" << endl;
++        cerr << endl << "Usage: ./mono_euroc path_to_vocabulary path_to_settings" << endl;
+         return 1;
+     }
+ 
+-    // Retrieve paths to images
+-    vector<string> vstrImageFilenames;
+-    vector<double> vTimestamps;
+-    string strFile = string(argv[3])+"/rgb.txt";
+-    LoadImages(strFile, vstrImageFilenames, vTimestamps);
+-
+-    int nImages = vstrImageFilenames.size();
+-
+     // Create SLAM system. It initializes all system threads and gets ready to process frames.
+-    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::MONOCULAR,true);
++    ORB_SLAM3::System SLAM(argv[1], argv[2], ORB_SLAM3::System::MONOCULAR, true);
+     float imageScale = SLAM.GetImageScale();
+ 
+-    // Vector for tracking time statistics
+-    vector<float> vTimesTrack;
+-    vTimesTrack.resize(nImages);
++    // Open the USB camera
++    cv::VideoCapture cap(0); // Change the number to select the desired camera
++    if(!cap.isOpened())
++    {
++        cerr << "Error: Could not open camera" << endl;
++        return -1;
++    }
+ 
+-    cout << endl << "-------" << endl;
+-    cout << "Start processing sequence ..." << endl;
+-    cout << "Images in the sequence: " << nImages << endl << endl;
++    // Set camera parameters (optional)
++    cap.set(cv::CAP_PROP_FRAME_WIDTH, 640);
++    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
++    cap.set(cv::CAP_PROP_FPS, 30);
+ 
++    // Vector for tracking time statistics
++    vector<float> vTimesTrack;
+     double t_resize = 0.f;
+     double t_track = 0.f;
+ 
+     // Main loop
+     cv::Mat im;
+-    for(int ni=0; ni<nImages; ni++)
++    while(true)
+     {
+-        // Read image from file
+-        im = cv::imread(string(argv[3])+"/"+vstrImageFilenames[ni],cv::IMREAD_UNCHANGED); //,cv::IMREAD_UNCHANGED);
+-        double tframe = vTimestamps[ni];
++        // Capture frame from camera
++        cap >> im;
+ 
+         if(im.empty())
+         {
+-            cerr << endl << "Failed to load image at: "
+-                 << string(argv[3]) << "/" << vstrImageFilenames[ni] << endl;
++            cerr << endl << "Failed to capture image" << endl;
+             return 1;
+         }
+ 
+@@ -99,86 +75,42 @@ int main(int argc, char **argv)
+ #endif
+         }
+ 
+-#ifdef COMPILEDWITHC14
++    #ifdef COMPILEDWITHC14
+         std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+-#else
++    #else
+         std::chrono::monotonic_clock::time_point t1 = std::chrono::monotonic_clock::now();
+-#endif
++    #endif
+ 
+         // Pass the image to the SLAM system
+-        SLAM.TrackMonocular(im,tframe);
++        double tframe = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::steady_clock::now().time_since_epoch()).count();
++        SLAM.TrackMonocular(im, tframe); // TODO change to monocular_inertial
+ 
+-#ifdef COMPILEDWITHC14
++    #ifdef COMPILEDWITHC14
+         std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
+-#else
++    #else
+         std::chrono::monotonic_clock::time_point t2 = std::chrono::monotonic_clock::now();
+-#endif
++    #endif
+ 
+ #ifdef REGISTER_TIMES
+-            t_track = t_resize + std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t2 - t1).count();
+-            SLAM.InsertTrackTime(t_track);
++        t_track = t_resize + std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t2 - t1).count();
++        SLAM.InsertTrackTime(t_track);
+ #endif
+ 
+-        double ttrack= std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
+-
+-        vTimesTrack[ni]=ttrack;
++        double ttrack = std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1).count();
++        vTimesTrack.push_back(ttrack);
+ 
+-        // Wait to load the next frame
+-        double T=0;
+-        if(ni<nImages-1)
+-            T = vTimestamps[ni+1]-tframe;
+-        else if(ni>0)
+-            T = tframe-vTimestamps[ni-1];
+-
+-        if(ttrack<T)
+-            usleep((T-ttrack)*1e6);
++        // Display the image
++        cv::imshow("Frame", im);
++        if(cv::waitKey(1) == 27) // Exit on ESC key
++            break;
+     }
+ 
+     // Stop all threads
+     SLAM.Shutdown();
+ 
+-    // Tracking time statistics
+-    sort(vTimesTrack.begin(),vTimesTrack.end());
+-    float totaltime = 0;
+-    for(int ni=0; ni<nImages; ni++)
+-    {
+-        totaltime+=vTimesTrack[ni];
+-    }
+-    cout << "-------" << endl << endl;
+-    cout << "median tracking time: " << vTimesTrack[nImages/2] << endl;
+-    cout << "mean tracking time: " << totaltime/nImages << endl;
+-
+     // Save camera trajectory
+-    SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");
++    SLAM.SaveTrajectoryEuRoC("CameraTrajectory.txt");
++    SLAM.SaveKeyFrameTrajectoryEuRoC("KeyFrameTrajectory.txt");
+ 
+     return 0;
+-}
+-
+-void LoadImages(const string &strFile, vector<string> &vstrImageFilenames, vector<double> &vTimestamps)
+-{
+-    ifstream f;
+-    f.open(strFile.c_str());
+-
+-    // skip first three lines
+-    string s0;
+-    getline(f,s0);
+-    getline(f,s0);
+-    getline(f,s0);
+-
+-    while(!f.eof())
+-    {
+-        string s;
+-        getline(f,s);
+-        if(!s.empty())
+-        {
+-            stringstream ss;
+-            ss << s;
+-            double t;
+-            string sRGB;
+-            ss >> t;
+-            vTimestamps.push_back(t);
+-            ss >> sRGB;
+-            vstrImageFilenames.push_back(sRGB);
+-        }
+-    }
+-}
++}
+\ No newline at end of file
+diff --git a/src/Viewer.cc b/src/Viewer.cc
+index 18f23f0..87279ad 100644
+--- a/src/Viewer.cc
++++ b/src/Viewer.cc
+@@ -161,226 +161,186 @@ bool Viewer::ParseViewerParamFile(cv::FileStorage &fSettings)
+ 
+ void Viewer::Run()
+ {
+-    mbFinished = false;
+-    mbStopped = false;
+-
+-    pangolin::CreateWindowAndBind("ORB-SLAM3: Map Viewer",1024,768);
+-
+-    // 3D Mouse handler requires depth testing to be enabled
+-    glEnable(GL_DEPTH_TEST);
+-
+-    // Issue specific OpenGl we might need
+-    glEnable (GL_BLEND);
+-    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+-
+-    pangolin::CreatePanel("menu").SetBounds(0.0,1.0,0.0,pangolin::Attach::Pix(175));
+-    pangolin::Var<bool> menuFollowCamera("menu.Follow Camera",false,true);
+-    pangolin::Var<bool> menuCamView("menu.Camera View",false,false);
+-    pangolin::Var<bool> menuTopView("menu.Top View",false,false);
+-    // pangolin::Var<bool> menuSideView("menu.Side View",false,false);
+-    pangolin::Var<bool> menuShowPoints("menu.Show Points",true,true);
+-    pangolin::Var<bool> menuShowKeyFrames("menu.Show KeyFrames",true,true);
+-    pangolin::Var<bool> menuShowGraph("menu.Show Graph",false,true);
+-    pangolin::Var<bool> menuShowInertialGraph("menu.Show Inertial Graph",true,true);
+-    pangolin::Var<bool> menuLocalizationMode("menu.Localization Mode",false,true);
+-    pangolin::Var<bool> menuReset("menu.Reset",false,false);
+-    pangolin::Var<bool> menuStop("menu.Stop",false,false);
+-    pangolin::Var<bool> menuStepByStep("menu.Step By Step",false,true);  // false, true
+-    pangolin::Var<bool> menuStep("menu.Step",false,false);
+-
+-    pangolin::Var<bool> menuShowOptLba("menu.Show LBA opt", false, true);
+-    // Define Camera Render Object (for view / scene browsing)
+-    pangolin::OpenGlRenderState s_cam(
+-                pangolin::ProjectionMatrix(1024,768,mViewpointF,mViewpointF,512,389,0.1,1000),
+-                pangolin::ModelViewLookAt(mViewpointX,mViewpointY,mViewpointZ, 0,0,0,0.0,-1.0, 0.0)
+-                );
+-
+-    // Add named OpenGL viewport to window and provide 3D Handler
+-    pangolin::View& d_cam = pangolin::CreateDisplay()
+-            .SetBounds(0.0, 1.0, pangolin::Attach::Pix(175), 1.0, -1024.0f/768.0f)
+-            .SetHandler(new pangolin::Handler3D(s_cam));
+-
+-    pangolin::OpenGlMatrix Twc, Twr;
+-    Twc.SetIdentity();
+-    pangolin::OpenGlMatrix Ow; // Oriented with g in the z axis
+-    Ow.SetIdentity();
+-    cv::namedWindow("ORB-SLAM3: Current Frame");
+-
+-    bool bFollow = true;
+-    bool bLocalizationMode = false;
+-    bool bStepByStep = false;
+-    bool bCameraView = true;
+-
+-    if(mpTracker->mSensor == mpSystem->MONOCULAR || mpTracker->mSensor == mpSystem->STEREO || mpTracker->mSensor == mpSystem->RGBD)
+-    {
+-        menuShowGraph = true;
+-    }
+-
+-    float trackedImageScale = mpTracker->GetImageScale();
+-
+-    cout << "Starting the Viewer" << endl;
+-    while(1)
+-    {
+-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+-
+-        mpMapDrawer->GetCurrentOpenGLCameraMatrix(Twc,Ow);
+-
+-        if(mbStopTrack)
+-        {
+-            menuStepByStep = true;
+-            mbStopTrack = false;
+-        }
+-
+-        if(menuFollowCamera && bFollow)
+-        {
+-            if(bCameraView)
+-                s_cam.Follow(Twc);
+-            else
+-                s_cam.Follow(Ow);
+-        }
+-        else if(menuFollowCamera && !bFollow)
+-        {
+-            if(bCameraView)
+-            {
+-                s_cam.SetProjectionMatrix(pangolin::ProjectionMatrix(1024,768,mViewpointF,mViewpointF,512,389,0.1,1000));
+-                s_cam.SetModelViewMatrix(pangolin::ModelViewLookAt(mViewpointX,mViewpointY,mViewpointZ, 0,0,0,0.0,-1.0, 0.0));
+-                s_cam.Follow(Twc);
+-            }
+-            else
+-            {
+-                s_cam.SetProjectionMatrix(pangolin::ProjectionMatrix(1024,768,3000,3000,512,389,0.1,1000));
+-                s_cam.SetModelViewMatrix(pangolin::ModelViewLookAt(0,0.01,10, 0,0,0,0.0,0.0, 1.0));
+-                s_cam.Follow(Ow);
+-            }
+-            bFollow = true;
+-        }
+-        else if(!menuFollowCamera && bFollow)
+-        {
+-            bFollow = false;
+-        }
+-
+-        if(menuCamView)
+-        {
+-            menuCamView = false;
+-            bCameraView = true;
+-            s_cam.SetProjectionMatrix(pangolin::ProjectionMatrix(1024,768,mViewpointF,mViewpointF,512,389,0.1,10000));
+-            s_cam.SetModelViewMatrix(pangolin::ModelViewLookAt(mViewpointX,mViewpointY,mViewpointZ, 0,0,0,0.0,-1.0, 0.0));
+-            s_cam.Follow(Twc);
+-        }
+-
+-        if(menuTopView && mpMapDrawer->mpAtlas->isImuInitialized())
+-        {
+-            menuTopView = false;
+-            bCameraView = false;
+-            s_cam.SetProjectionMatrix(pangolin::ProjectionMatrix(1024,768,3000,3000,512,389,0.1,10000));
+-            s_cam.SetModelViewMatrix(pangolin::ModelViewLookAt(0,0.01,50, 0,0,0,0.0,0.0, 1.0));
+-            s_cam.Follow(Ow);
+-        }
+-
+-        if(menuLocalizationMode && !bLocalizationMode)
+-        {
+-            mpSystem->ActivateLocalizationMode();
+-            bLocalizationMode = true;
+-        }
+-        else if(!menuLocalizationMode && bLocalizationMode)
+-        {
+-            mpSystem->DeactivateLocalizationMode();
+-            bLocalizationMode = false;
+-        }
+-
+-        if(menuStepByStep && !bStepByStep)
+-        {
+-            //cout << "Viewer: step by step" << endl;
+-            mpTracker->SetStepByStep(true);
+-            bStepByStep = true;
+-        }
+-        else if(!menuStepByStep && bStepByStep)
+-        {
+-            mpTracker->SetStepByStep(false);
+-            bStepByStep = false;
+-        }
+-
+-        if(menuStep)
+-        {
+-            mpTracker->mbStep = true;
+-            menuStep = false;
+-        }
+-
+-
+-        d_cam.Activate(s_cam);
+-        glClearColor(1.0f,1.0f,1.0f,1.0f);
+-        mpMapDrawer->DrawCurrentCamera(Twc);
+-        if(menuShowKeyFrames || menuShowGraph || menuShowInertialGraph || menuShowOptLba)
+-            mpMapDrawer->DrawKeyFrames(menuShowKeyFrames,menuShowGraph, menuShowInertialGraph, menuShowOptLba);
+-        if(menuShowPoints)
+-            mpMapDrawer->DrawMapPoints();
+-
+-        pangolin::FinishFrame();
+-
+-        cv::Mat toShow;
+-        cv::Mat im = mpFrameDrawer->DrawFrame(trackedImageScale);
+-
+-        if(both){
+-            cv::Mat imRight = mpFrameDrawer->DrawRightFrame(trackedImageScale);
+-            cv::hconcat(im,imRight,toShow);
+-        }
+-        else{
+-            toShow = im;
+-        }
+-
+-        if(mImageViewerScale != 1.f)
+-        {
+-            int width = toShow.cols * mImageViewerScale;
+-            int height = toShow.rows * mImageViewerScale;
+-            cv::resize(toShow, toShow, cv::Size(width, height));
+-        }
+-
+-        cv::imshow("ORB-SLAM3: Current Frame",toShow);
+-        cv::waitKey(mT);
+-
+-        if(menuReset)
+-        {
+-            menuShowGraph = true;
+-            menuShowInertialGraph = true;
+-            menuShowKeyFrames = true;
+-            menuShowPoints = true;
+-            menuLocalizationMode = false;
+-            if(bLocalizationMode)
+-                mpSystem->DeactivateLocalizationMode();
+-            bLocalizationMode = false;
+-            bFollow = true;
+-            menuFollowCamera = true;
+-            mpSystem->ResetActiveMap();
+-            menuReset = false;
+-        }
+-
+-        if(menuStop)
+-        {
+-            if(bLocalizationMode)
+-                mpSystem->DeactivateLocalizationMode();
+-
+-            // Stop all threads
+-            mpSystem->Shutdown();
+-
+-            // Save camera trajectory
+-            mpSystem->SaveTrajectoryEuRoC("CameraTrajectory.txt");
+-            mpSystem->SaveKeyFrameTrajectoryEuRoC("KeyFrameTrajectory.txt");
+-            menuStop = false;
+-        }
+-
+-        if(Stop())
+-        {
+-            while(isStopped())
+-            {
+-                usleep(3000);
+-            }
+-        }
+-
+-        if(CheckFinish())
+-            break;
+-    }
+-
+-    SetFinish();
++    mbFinished = false;
++    mbStopped = false;
++
++    // First window
++    pangolin::CreateWindowAndBind("ORB-SLAM3: Map Viewer", 1024, 768);
++    glEnable(GL_DEPTH_TEST);
++    glEnable(GL_BLEND);
++    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
++    pangolin::CreatePanel("menu").SetBounds(0.0, 1.0, 0.0, pangolin::Attach::Pix(175));
++
++    // Menu options
++    pangolin::Var<bool> menuFollowCamera("menu.Follow Camera", false, true);
++    pangolin::Var<bool> menuShowPoints("menu.Show Points", true, true);
++    pangolin::Var<bool> menuShowKeyFrames("menu.Show KeyFrames", true, true);
++    pangolin::Var<bool> menuShowGraph("menu.Show Graph", false, true);
++    pangolin::Var<bool> menuShowInertialGraph("menu.Show Inertial Graph", true, true);
++    pangolin::Var<bool> menuLocalizationMode("menu.Localization Mode", false, true);
++    pangolin::Var<bool> menuReset("menu.Reset", false, false);
++    pangolin::Var<bool> menuStop("menu.Stop", false, false);
++    pangolin::Var<bool> menuStepByStep("menu.Step By Step", false, true);
++    pangolin::Var<bool> menuStep("menu.Step", false, false);
++    pangolin::Var<bool> menuShowOptLba("menu.Show LBA opt", false, true);
++
++    pangolin::OpenGlRenderState s_cam(
++        pangolin::ProjectionMatrix(1024, 768, mViewpointF, mViewpointF, 512, 389, 0.1, 1000),
++        pangolin::ModelViewLookAt(mViewpointX, mViewpointY, mViewpointZ, 0, 0, 0, 0.0, -1.0, 0.0)
++    );
++
++    pangolin::View& d_cam = pangolin::CreateDisplay()
++        .SetBounds(0.0, 1.0, pangolin::Attach::Pix(175), 1.0, -1024.0f / 768.0f)
++        .SetHandler(new pangolin::Handler3D(s_cam));
++
++    // Second window
++    pangolin::CreateWindowAndBind("ORB-SLAM3: Map Viewer 2", 1024, 768);
++    pangolin::OpenGlRenderState s_cam_bird(
++        pangolin::ProjectionMatrix(1024, 768, 3000, 3000, 512, 389, 0.1, 10000),
++        pangolin::ModelViewLookAt(0, 50, 0, 0, 0, 0, 0.0, 0.0, 1.0)
++    );
++    pangolin::View& d_cam2 = pangolin::CreateDisplay()
++        .SetBounds(0.0, 1.0, pangolin::Attach::Pix(175), 1.0, -1024.0f / 768.0f)
++        .SetHandler(new pangolin::Handler3D(s_cam_bird));
++
++    // Shared state variables
++    pangolin::OpenGlMatrix Twc, Twr;
++    Twc.SetIdentity();
++    pangolin::OpenGlMatrix Ow; // Oriented with g in the z axis
++    Ow.SetIdentity();
++    cv::namedWindow("ORB-SLAM3: Current Frame");
++
++    bool bFollow = true;
++    bool bLocalizationMode = false;
++    bool bStepByStep = false;
++    bool bCameraView = true;
++
++    if (mpTracker->mSensor == mpSystem->MONOCULAR || mpTracker->mSensor == mpSystem->STEREO || mpTracker->mSensor == mpSystem->RGBD)
++    {
++        menuShowGraph = true;
++    }
++
++    float trackedImageScale = mpTracker->GetImageScale();
++
++    cout << "Starting the Viewer" << endl;
++
++    while (1)
++    {
++        // Update logic shared between windows
++        if (mbStopTrack)
++        {
++            menuStepByStep = true;
++            mbStopTrack = false;
++        }
++
++        if (menuFollowCamera && bFollow)
++        {
++            s_cam.Follow(bCameraView ? Twc : Ow);
++        }
++        else if (menuFollowCamera && !bFollow)
++        {
++            s_cam.SetProjectionMatrix(pangolin::ProjectionMatrix(1024, 768, bCameraView ? mViewpointF : 3000, bCameraView ? mViewpointF : 3000, 512, 389, 0.1, 1000));
++            s_cam.SetModelViewMatrix(pangolin::ModelViewLookAt(bCameraView ? mViewpointX : 0, bCameraView ? mViewpointY : 0.01, bCameraView ? mViewpointZ : 10, 0, 0, 0, 0.0, bCameraView ? -1.0 : 0.0, 0.0));
++            s_cam.Follow(bCameraView ? Twc : Ow);
++            bFollow = true;
++        }
++        else if (!menuFollowCamera && bFollow)
++        {
++            bFollow = false;
++        }
++
++        // Update for the first window
++        pangolin::BindToContext("ORB-SLAM3: Map Viewer");
++        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
++        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);  // Set background color to white
++        mpMapDrawer->GetCurrentOpenGLCameraMatrix(Twc, Ow);
++        d_cam.Activate(s_cam);
++        mpMapDrawer->DrawCurrentCamera(Twc);
++        if (menuShowKeyFrames || menuShowGraph || menuShowInertialGraph || menuShowOptLba)
++            mpMapDrawer->DrawKeyFrames(menuShowKeyFrames, menuShowGraph, menuShowInertialGraph, menuShowOptLba);
++        if (menuShowPoints)
++            mpMapDrawer->DrawMapPoints();
++        pangolin::FinishFrame();
++
++        // Update for the second window (bird's eye view)
++        pangolin::BindToContext("ORB-SLAM3: Map Viewer 2");
++        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
++        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);  // Set background color to white
++        d_cam2.Activate(s_cam_bird);
++        mpMapDrawer->DrawCurrentCamera(Twc);
++        if (menuShowKeyFrames || menuShowGraph || menuShowInertialGraph || menuShowOptLba)
++            mpMapDrawer->DrawKeyFrames(menuShowKeyFrames, menuShowGraph, menuShowInertialGraph, menuShowOptLba);
++        if (menuShowPoints)
++            mpMapDrawer->DrawMapPoints();
++        pangolin::FinishFrame();
++
++        // Display current frame
++        cv::Mat toShow;
++        cv::Mat im = mpFrameDrawer->DrawFrame(trackedImageScale);
++        if (both)
++        {
++            cv::Mat imRight = mpFrameDrawer->DrawRightFrame(trackedImageScale);
++            cv::hconcat(im, imRight, toShow);
++        }
++        else
++        {
++            toShow = im;
++        }
++
++        if (mImageViewerScale != 1.f)
++        {
++            int width = toShow.cols * mImageViewerScale;
++            int height = toShow.rows * mImageViewerScale;
++            cv::resize(toShow, toShow, cv::Size(width, height));
++        }
++
++        cv::imshow("ORB-SLAM3: Current Frame", toShow);
++        cv::waitKey(mT);
++
++        // Handle reset and stop commands
++        if (menuReset)
++        {
++            menuShowGraph = true;
++            menuShowInertialGraph = true;
++            menuShowKeyFrames = true;
++            menuShowPoints = true;
++            menuLocalizationMode = false;
++            if (bLocalizationMode)
++                mpSystem->DeactivateLocalizationMode();
++            bLocalizationMode = false;
++            bFollow = true;
++            menuFollowCamera = true;
++            mpSystem->ResetActiveMap();
++            menuReset = false;
++        }
++
++        if (menuStop)
++        {
++            if (bLocalizationMode)
++                mpSystem->DeactivateLocalizationMode();
++
++            // Stop all threads
++            mpSystem->Shutdown();
++
++            // Save camera trajectory
++            mpSystem->SaveTrajectoryEuRoC("CameraTrajectory.txt");
++            mpSystem->SaveKeyFrameTrajectoryEuRoC("KeyFrameTrajectory.txt");
++            menuStop = false;
++        }
++
++        if (Stop())
++        {
++            while (isStopped())
++            {
++                usleep(3000);
++            }
++        }
++
++        if (CheckFinish())
++            break;
++    }
++
++    SetFinish();
+ }
+ 
+ void Viewer::RequestFinish()
+root@docker-desktop:~/Dev/ORB_SLAM3/src# nano patch.diff
+
+  GNU nano 4.8                                 patch.diff                                            
++
++                            cv::imshow("ORB-SLAM3: Current Frame", toShow);
++                            cv::waitKey(mT);
++
++                            // Handle reset and stop commands
++                            if (menuReset)
++                            {
++                                          menuShowGraph = true;
++                                          menuShowInertialGraph = true;
++                                          menuShowKeyFrames = true;
++                                          menuShowPoints = true;
++                                          menuLocalizationMode = false;
++                                          if (bLocalizationMode)
++                                                        mpSystem->DeactivateLocalizationMode();
++                                          bLocalizationMode = false;
++                                          bFollow = true;
++                                          menuFollowCamera = true;
++                                          mpSystem->ResetActiveMap();
++                                          menuReset = false;
++                            }
++
++                            if (menuStop)
++                            {
++                                          if (bLocalizationMode)
++                                                        mpSystem->DeactivateLocalizationMode();
++
++                                          // Stop all threads
++                                          mpSystem->Shutdown();
++
++                                          // Save camera trajectory
++                                          mpSystem->SaveTrajectoryEuRoC("CameraTrajectory.txt");
++                                          mpSystem->SaveKeyFrameTrajectoryEuRoC("KeyFrameTrajectory.
++                                          menuStop = false;
++                            }
++
++                            if (Stop())
++                            {
++                                          while (isStopped())
++                                          {
++                                                        usleep(3000);
++                                          }
++                            }
++
++                            if (CheckFinish())
++                                          break;
++              }
++
++              SetFinish();
+ }
+ 
+ void Viewer::RequestFinish()
+

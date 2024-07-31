@@ -88,7 +88,7 @@ RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git /root/Dev/ORB_SLAM3 --dept
 WORKDIR /root/Dev/ORB_SLAM3
 RUN patch -p1 < ../Patch/orb_slam3_patch.diff
 COPY Viewer.cc /root/Dev/ORB_SLAM3/src/Viewer.cc
-COPY mono_kitti.cc /root/Dev/ORB_SLAM3/Examples/Monocular/mono_kitti.cc
+# COPY mono_kitti.cc /root/Dev/ORB_SLAM3/Examples/Monocular/mono_kitti.cc
 
 # Build ORB_SLAM3
 RUN chmod +x build.sh && ./build.sh

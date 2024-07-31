@@ -71,6 +71,10 @@ COPY orb_slam3_patch.diff /root/Dev/Patch/
 COPY mono_euroc.sh /root/Dev/Scripts/mono_euroc.sh
 COPY mono_inertial_euroc.sh /root/Dev/Scripts/mono_inertial_euroc.sh
 COPY mono_webcam.sh /root/Dev/Scripts/mono_webcam.sh
+COPY mono_footage.sh /root/Dev/Scripts/mono_footage.sh
+
+# Copy in footage
+COPY mac_footage.mov /root/Dev/Videos/mac_footage.mov
 
 # Make the scripts executable
 RUN chmod +x /root/Dev/Scripts/mono_euroc.sh
@@ -84,6 +88,7 @@ RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git /root/Dev/ORB_SLAM3 --dept
 WORKDIR /root/Dev/ORB_SLAM3
 RUN patch -p1 < ../Patch/orb_slam3_patch.diff
 COPY Viewer.cc /root/Dev/ORB_SLAM3/src/Viewer.cc
+COPY mono_kitti.cc /root/Dev/ORB_SLAM3/Examples/Monocular/mono_kitti.cc
 
 # Build ORB_SLAM3
 RUN chmod +x build.sh && ./build.sh

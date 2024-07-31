@@ -22,6 +22,12 @@ RUN apt-get update && apt-get install -y \
     unzip \
     iputils-ping \
     x11-apps \
+    ffmpeg \
+    libavcodec-dev \
+    libavformat-dev \
+    libavutil-dev \
+    libswscale-dev \
+    libavresample-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Pangolin 0.6
@@ -49,6 +55,7 @@ RUN cd /tmp && \
           -D BUILD_DOCS=OFF \
           -D BUILD_PERF_TESTS=OFF \
           -D BUILD_TESTS=OFF \
+          -D WITH_FFMPEG=ON \
           -D CMAKE_INSTALL_PREFIX=/usr/local .. && \
     echo "Running make..." && \
     make -j$(nproc) && make install && \
@@ -76,6 +83,7 @@ COPY mono_footage.sh /root/Dev/Scripts/mono_footage.sh
 # Copy in footage
 COPY mac_footage.mov /root/Dev/Videos/mac_footage.mov
 COPY mac_footage.mp4 /root/Dev/Videos/mac_footage.mp4
+COPY third_floor.mp4 /root/Dev/Videos/third_floor.mp4
 
 # Make the scripts executable
 RUN chmod +x /root/Dev/Scripts/mono_euroc.sh

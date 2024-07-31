@@ -75,11 +75,13 @@ COPY mono_footage.sh /root/Dev/Scripts/mono_footage.sh
 
 # Copy in footage
 COPY mac_footage.mov /root/Dev/Videos/mac_footage.mov
+COPY mac_footage.mp4 /root/Dev/Videos/mac_footage.mp4
 
 # Make the scripts executable
 RUN chmod +x /root/Dev/Scripts/mono_euroc.sh
 RUN chmod +x /root/Dev/Scripts/mono_inertial_euroc.sh
 RUN chmod +x /root/Dev/Scripts/mono_webcam.sh
+RUN chmod +x /root/Dev/Scripts/mono_footage.sh
 
 # Clone ORB_SLAM3 from the new repository
 RUN git clone https://github.com/aPR0T0/ORB_SLAM3.git /root/Dev/ORB_SLAM3 --depth 1

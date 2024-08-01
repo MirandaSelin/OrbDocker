@@ -84,7 +84,7 @@ COPY mono_footage.sh /root/Dev/Scripts/mono_footage.sh
 COPY videos/mac_footage.mov /root/Dev/Videos/mac_footage.mov
 COPY videos/mac_footage.mp4 /root/Dev/Videos/mac_footage.mp4
 COPY videos/third_floor.mp4 /root/Dev/Videos/third_floor.mp4
-COPY videos/third_floor_slow.mp4 /root/Dev/Videos/third_floor.mp4
+# COPY videos/third_floor_slow.mp4 /root/Dev/Videos/third_floor.mp4
 
 # Make the scripts executable
 RUN chmod +x /root/Dev/Scripts/mono_euroc.sh

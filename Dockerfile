@@ -80,9 +80,6 @@ COPY mono_inertial_euroc.sh /root/Dev/Scripts/mono_inertial_euroc.sh
 COPY mono_webcam.sh /root/Dev/Scripts/mono_webcam.sh
 COPY mono_footage.sh /root/Dev/Scripts/mono_footage.sh
 
-# Copy in footage
-ADD Videos /root/Dev/Videos
-
 # Make the scripts executable
 RUN chmod +x /root/Dev/Scripts/mono_euroc.sh
 RUN chmod +x /root/Dev/Scripts/mono_inertial_euroc.sh
@@ -106,6 +103,9 @@ COPY ./src ./src
 
 # Build example
 RUN cd ~/src/build && cmake .. && make
+
+# Copy in footage
+ADD Videos /root/Dev/Videos
 
 # Set default command to start an interactive shell
 CMD ["/bin/bash"]

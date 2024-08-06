@@ -81,7 +81,7 @@ COPY mono_webcam.sh /root/Dev/Scripts/mono_webcam.sh
 COPY mono_footage.sh /root/Dev/Scripts/mono_footage.sh
 
 # Copy in footage
-COPY videos/* /root/Dev/Videos
+ADD Videos /root/Dev/Videos
 
 # Make the scripts executable
 RUN chmod +x /root/Dev/Scripts/mono_euroc.sh
